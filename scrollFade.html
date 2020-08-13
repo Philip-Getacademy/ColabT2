@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style>
+body {
+    height: 2000px;
+}
+.a {
+    height: 300px;
+    width: 300px;
+    background-color: green;
+}
+</style>
+</head>
+<body class="body">
+
+  <div>
+      <div class="a">
+          A
+      </div>
+
+  </div>​
+
+
+</body>
+<script>
+$(window).scroll(function() {
+
+   if ($(this).scrollTop()>0)
+    {
+       $('.a').fadeOut();
+    }
+   else
+    {
+     $('.a').fadeIn();
+    }
+});
+</script>
+</html>
