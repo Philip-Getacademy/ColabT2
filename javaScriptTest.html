@@ -1,18 +1,23 @@
-﻿﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Team</title>
 </head>
+
 <body>
     <p>Ferdighet 2 - Onclick => Kjøre funksjon som endrer innerHTML til element ut fra Id</p>
     <h2 id="a1">Hva er navnet</h2>
     <h2 id="a2">test på test</h2>
     <h2 id="a3">kan du lese det her</h2>
-    <h2 onclick="doSomething()">BBBBBBBBBBBBBBBB</h2>
+    <h2 onclick="doSomething()">Trykk Her</h2>
     <p>hei på deg ser du det her?</p>
+    <p><b>JA</b></p>
+
+    <p id="b1"></p>
+
 
     <script>
         function doSomething() {
@@ -20,7 +25,16 @@
             document.getElementById('a2').innerHTML = 'Test 123';
             document.getElementById('a3').innerHTML = 'ser du det her';
 
+
+            var tall = "";
+            var i;
+            for (i = 0; i < 10; i += 2) {
+                tall += i + "<br>";
+            }
+            document.getElementById('b1').innerHTML = tall;
+
         }
     </script>
 </body>
+
 </html>
