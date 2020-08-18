@@ -3,9 +3,72 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <title>Rutenett Team 2</title>
+    <style>
 
+        body {
+            display: grid;
+            height: 50vh;
+            width: 50vh;
+            grid-template-columns: 33vh 33vh 33vh;
+            grid-template-rows: 33vh 33vh 33vh;
+            grid-template-areas: '   div div div ' '   div div div ' '   div div div ';
+        }
+        div {
+            background-color: #456FB0;
+            border-style: ridge;
+        }
+    </style>
+</head>
+<body id="carrier">
+
+
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+    var children = document.getElementById('carrier').children;
+
+    onLoading();
+
+    function onLoading() {
+
+
+        for (var i = 0; i < children.length-1; i++)
+            if (children % 3 == 0) {
+
+                children[i].stlye.backgroundColor = "red";
+
+            } 
+
+    }
+
+</script>
+    
 </body>
 </html>
