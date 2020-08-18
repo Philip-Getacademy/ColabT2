@@ -16,7 +16,8 @@
         }
         div {
             background-color: #456FB0;
-            border-style: ridge;
+            border-style: solid;
+            border-width: 1px;
         }
     </style>
 </head>
@@ -38,32 +39,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 <script>
 
 
 
-    var children = document.getElementById('carrier').children;
+    var carrier = document.getElementById('carrier').children;
+    var i = 0;
 
     onLoading();
 
     function onLoading() {
 
 
-        for (var i = 0; i < children.length-1; i++)
-            if (children % 3 == 0) {
-
-                children[i].stlye.backgroundColor = "red";
-
+        for (i; i < carrier.length-1; i++)
+            if (i % 3 == 0) {
+                carrier[i].stlye.backgroundColor = "red";
+                
             } 
 
     }
