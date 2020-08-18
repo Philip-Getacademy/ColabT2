@@ -27,15 +27,16 @@
 
 
 
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
+<div onclick="Hallo()">test</div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+<div onclick="Hallo"></div>
+
 
 
 
@@ -46,6 +47,7 @@
 
 
     var carrier = document.getElementById('carrier').children;
+
     var i = 0;
 
     onLoading();
@@ -54,9 +56,11 @@
 
         for (i; i < carrier.length - 1; i++)
             if (i % 3 == 0) {
-                carrier.stlye.backgroundColor = "red";
+
+                carrier[i+2].style.backgroundColor = "red";
 
             }
+
     }
 
 
