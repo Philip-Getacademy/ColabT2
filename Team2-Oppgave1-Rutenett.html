@@ -47,20 +47,18 @@
 
 
     var carrier = document.getElementById('carrier').children;
-
     var i = 0;
 
     onLoading();
 
     function onLoading() {
-
-        for (i; i < carrier.length - 1; i++)
+        for (i; i < carrier.length - 1; i++) {
             if (i % 3 == 0) {
 
-                carrier[i+2].style.backgroundColor = "red";
+                carrier[i + 2].style.backgroundColor = "red";
 
             }
-
+        }
     }
 
 
