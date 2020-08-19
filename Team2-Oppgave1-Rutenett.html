@@ -10,11 +10,10 @@
             display: grid;
             height: 50vh;
             width: 50vh;
-            grid-template-rows:     20vh 20vh 20vh;
-            grid-template-columns:  20vh 20vh 20vh;
-            grid-template-areas:    '   div div div '
-                                    '   div div div ' 
-                                    '   div div div ';
+            background-color: #3C6C80;
+            grid-template-rows: 20vh 20vh 20vh;
+            grid-template-columns: 20vh 20vh 20vh;
+            grid-template-areas: '   div div div ' '   div div div ' '   div div div ';
         }
         div {
             background-color: #456FB0;
@@ -23,64 +22,38 @@
             border-width: 1px;
 
         }
+        /*
         #circle {
-            padding: 20px;
-            background-color: red;
+            padding: 0px;
+            background-color: darkcyan;
             border-color: black;
             border-radius: 100%;
             border: 5px solid #000;
         }
+        */
         #cross {
 
         }
+
 
 
     </style>
 </head>
 <body id="carrier">
 
-
-
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-<div onclick="select()"id="circle"></div>
-
-
-
-
-
+    <div onclick="select(this)" id="circle">test</div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
+    <div onclick="select(this)" id="circle"></div>
 
 
 
 <script>
-
-
-
-    function circle() { }
-    function square() { }
-
-
-
-/*  Create new CSS for % object[i]
-    var carrier = document.getElementById('carrier').children;
-    var i = 0;
-
-    onLoading();
-
-    function onLoading() {
-        for (i; i < carrier.length - 1; i++) {
-            if (i % 3 == 0) {
-                carrier[i + 2].style.backgroundColor = "red";
-
-            }
-        }
-    }
-*/
-
-</script></body></html>
+</script>
+</body>
+</html>
