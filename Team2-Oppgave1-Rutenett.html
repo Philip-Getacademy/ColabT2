@@ -15,34 +15,21 @@
 			grid-template-columns: 20vh 20vh 20vh;
 			grid-template-areas: '   div div div ' '   div div div ' '   div div div ';
 		}
-		div {
-			background-color: #456FB0;
-			border-style: solid;
-			outline-style: solid;
-			border-width: 1px;
-
-		}
-		/*
-		#circle {
-			padding: 0px;
-			background-color: darkcyan;
-			border-color: black;
-			border-radius: 100%;
-			border: 5px solid #000;
-		}
-		*/
-		#cross {
-
-		}
-
-
+        div {
+            background-color: #456FB0;
+            border-style: solid;
+            outline-style: solid;
+            border-width: 1px;
+            text-align: center;
+            font-size: 120px;
+        }
 
 	</style>
 </head>
 <body id="carrier">
 
-	<div onclick="select(this)" id="circle">test</div>
 	<div onclick="select(this)" id="circle"></div>
+	<div onclick="select(this)" id="cirlce"></div>
 	<div onclick="select(this)" id="circle"></div>
 	<div onclick="select(this)" id="circle"></div>
 	<div onclick="select(this)" id="circle"></div>
@@ -54,23 +41,22 @@
 
 
 <script>
-	 
-	function select(minBrikke) { 
-	
-	
-	
-	var carrier = document.getElementById('carrier').children;
-	var i = 0;
 
-	onLoading();
+	var startSpill = 1;
 
-	function onLoading() {
-		for (i; i < carrier.length - 1; i++) {
-			if (i % 3 == 0) {
-				carrier[i + 2].style.backgroundColor = "red";
-
-			}
+	function select(minBrikke) {
+		if (startSpill == 1 ) {
+			minBrikke.innerHTML = "X";
+			startSpill = 2;
+			
 		}
+        
+		else if ((startSpill % 2) == 0) {
+			minBrikke.innerHTML = "O";
+			startSpill = 1;
+
+        }
+		console.log(startSpill);
 	}
  
 
