@@ -5,47 +5,107 @@
 <head>
     <meta charset="utf-8" />
     <title>777 777 777</title>
+    <style>
+        body {
+            height: 300px;
+            background-color: #5C6874;
+        }
+        #code button {
+            height: 30px;
+            width: 30px;
+            border: none;
+        }
+        p {}
+        #unlock {
+            margin-top: 10px;
+            height: 30px;
+            width: 302px;
+            border: none;
+        }
+
+
+    </style>
 </head>
 <body>
     <p>Ferdighet 4 - Variabel utenfor funksjon og innenfor funksjon, samt sette sammen tekst av flere deler</p>
 
     <div id="container">
         <div id="code">
-            <button align="center" onclick="incN1()" id="number1">0</button>
-            <button align="center" onclick="incN2()" id="number2">0</button>
-            <button align="center" onclick="incN3()" id="number3">0</button>
-            <button align="center" onclick="incN4()" id="number4">0</button>
-            <button align="center" onclick="incN5()" id="number5">0</button>
-            <button align="center" onclick="incN6()" id="number6">0</button>
-            <button align="center" onclick="incN7()" id="number7">0</button>
-            <button align="center" onclick="incN8()" id="number8">0</button>
-            <button align="center" onclick="incN9()" id="number9">0</button>
+            <button onclick="klikk(this)" id="number1"></button>
+            <button onclick="klikk(this)" id="number2"></button>
+            <button onclick="klikk(this)" id="number3"></button>
+            <button onclick="klikk(this)" id="number4"></button>
+            <button onclick="klikk(this)" id="number5"></button>
+            <button onclick="klikk(this)" id="number6"></button>
+            <button onclick="klikk(this)" id="number7"></button>
+            <button onclick="klikk(this)" id="number8"></button>
+            <button onclick="klikk(this)" id="number9"></button>
+            
         </div>
-        
+        <button onclick="unlock()" id="unlock">unlock</button>
     </div>
     <script>
 
-            var n1 = 0;
-            var n2 = 0;
-            var n3 = 0;
-            var n4 = 0;
-            var n5 = 0;
-            var n6 = 0;
-            var n7 = 0;
-            var n8 = 0;
-            var n9 = 0;
+        var antallKnapper = document.getElementById('code').children.length;
+        var i = 0;
+        var x = 0;
+        var y = 0;
+        var solution = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-            document.getElementById('number1').innerHTML = n1
-            document.getElementById('number2').innerHTML = n2
-            document.getElementById('number3').innerHTML = n3
-            document.getElementById('number4').innerHTML = n4
-            document.getElementById('number5').innerHTML = n5
-            document.getElementById('number6').innerHTML = n6
-            document.getElementById('number7').innerHTML = n7
-            document.getElementById('number8').innerHTML = n8
-            document.getElementById('number9').innerHTML = n9
 
-            function incN1() {
+        for (i; i < antallKnapper; i++) {
+            document.getElementById(`number${i + 1}`).innerHTML = i;
+        }
+
+        function klikk(klikkBar) {
+            if (klikkBar.innerHTML < 9) {
+                klikkBar.innerHTML++;
+            }
+            else {
+                klikkBar.innerHTML = 0;
+            }
+/*
+ 
+       
+ 
+ */
+
+
+        }
+
+        function unlock() {
+            for (x; x < 9; x++) {
+                if (document.getElementById(`number${x + 1}`).innerHTML != solution[x]) {
+                x = 0;  
+                }
+            
+            }
+            for (y; y < 9; y++) {
+                if (document.getElementById(`number${y + 1}`).innerHTML == solution[y]) {
+                    document.getElementById(`number${y + 1}`).style.backgroundColor = "#0FC427";
+                }                
+            } 
+        }
+
+
+
+/*
+        document.getElementById(`number${i + 1}`).innerHTML;
+*/
+
+
+
+
+        /*
+        var x = 0;
+        for (x; x < ferdig; x++) {
+
+            document.getElementById('container').innerHTML += "<p>"
+            document.getElementById('container').innerHTML += "NEI"
+            document.getElementById('container').innerHTML += "</p>"
+        }
+        */
+      /*      function incN1() {
                 if (n1>9) {
                     n1 = 0;
                     document.getElementById("number1").innerHTML = n1;
@@ -61,63 +121,8 @@
                     document.getElementById("number2").innerHTML = n2++;
                 }
         }
-            function incN3() {
-                if (n3>9) {
-                    n3 = 0;
-                    document.getElementById("number3").innerHTML = n3;
-                } else {
-                    document.getElementById("number3").innerHTML = n3++;
-                }
-        }
-            function incN4() {
-                if (n4>9) {
-                    n4 = 0;
-                    document.getElementById("number4").innerHTML = n4;
-                } else {
-                    document.getElementById("number4").innerHTML = n4++;
-                }
-        }
-            function incN5() {
-                if (n5>9) {
-                    n5 = 0;
-                    document.getElementById("number5").innerHTML = n5;
-                } else {
-                    document.getElementById("number5").innerHTML = n5++;
-                }
-        }
-            function incN6() {
-                if (n6>9) {
-                    n6 = 0;
-                    document.getElementById("number6").innerHTML = n6;
-                } else {
-                    document.getElementById("number6").innerHTML = n6++;
-                }
-        }
-            function incN7() {
-                if (n7>9) {
-                    n7 = 0;
-                    document.getElementById("number7").innerHTML = n7;
-                } else {
-                    document.getElementById("number7").innerHTML = n7++;
-                }
-        }
-            function incN8() {
-                if (n8>9) {
-                    n8 = 0;
-                    document.getElementById("number8").innerHTML = n8;
-                } else {
-                    document.getElementById("number8").innerHTML = n8++;
-                }
-        }
-            function incN9() {
-                if (n9>9) {
-                    n9 = 0;
-                    document.getElementById("number9").innerHTML = n9;
-                } else {
-                    document.getElementById("number9").innerHTML = n9++;
-                }
-        }
 
+        */
     </script>
 </body>
 </html>
