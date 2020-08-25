@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <style>
+            body {
+                height: 90vh;
+                width: 90vw;
+                background-color: rgb(97, 97, 104);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            h1 {
+                color: rgb(255, 255, 255);
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body onload="cutImageUp()">
+        <h1>Puslespill</h1>
+
+
+        <script>
+            var numColsToCut = 20;
+            var numRowsToCut = 20;
+
+            var widthOfOnePiece = 50;
+            var heightOfOnePiece = 50;
+
+            var image = new Image();
+            
+            image.src = "cool-wallpaper-1.jpg";
+
+            function cutImageUp() {
+                var canvas = document.createElement('canvas');
+                var imagePieces = [];
+                for(var x = 0; x < numColsToCut; ++x) {
+                    for(var y = 0; y < numRowsToCut; ++y) {
+                        canvas.width = widthOfOnePiece;
+                        canvas.height = heightOfOnePiece;
+                        var context = canvas.getContext('2d');
+                        context.drawImage(  image, 
+                                            x * widthOfOnePiece, 
+                                            y * heightOfOnePiece, 
+                                            widthOfOnePiece, 
+                                            heightOfOnePiece, 
+                                            0, 0, 
+                                            canvas.width, 
+                                            canvas.height
+                        );
+                        imagePieces.push(canvas.toDataURL());
+                    }
+                }
+
+                // imagePieces now contains data urls of all the pieces of the image
+
+                // load one piece onto the page
+                var anImageElement = document.getElementsByName('canvas');
+                anImageElement.src = imagePieces[0];
+            }
+
+        </script>
+    </body>
+</html>
