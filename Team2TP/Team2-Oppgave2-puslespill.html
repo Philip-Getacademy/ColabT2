@@ -2,8 +2,6 @@
     <head>
         <style>
             body {
-                height: 90vh;
-                width: 90vw;
                 background-color: rgb(97, 97, 104);
                 display: flex;
                 flex-direction: column;
@@ -13,51 +11,50 @@
                 color: rgb(255, 255, 255);
                 text-align: center;
             }
+            #myCanvas {
+                border:1px solid #d3d3d3;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
 
         </style>
     </head>
-    <body onload="cutImageUp()">
+    <body>
         <h1>Puslespill</h1>
-
-
+        <canvas id="myCanvas" width="800" height="500" ></canvas>
+        
+     
+    
         <script>
-            var numColsToCut = 20;
-            var numRowsToCut = 20;
 
-            var widthOfOnePiece = 50;
-            var heightOfOnePiece = 50;
 
-            var image = new Image();
             
-            image.src = "cool-wallpaper-1.jpg";
+            var img = document.createElement('img');
+            img.src = 'cool-wallpaper-1.jpg';
+            img.onload = function drawCanvas() {
+                var c = document.getElementById('myCanvas');
+                var ctx = c.getContext('2d');
 
-            function cutImageUp() {
-                var canvas = document.createElement('canvas');
-                var imagePieces = [];
-                for(var x = 0; x < numColsToCut; ++x) {
-                    for(var y = 0; y < numRowsToCut; ++y) {
-                        canvas.width = widthOfOnePiece;
-                        canvas.height = heightOfOnePiece;
-                        var context = canvas.getContext('2d');
-                        context.drawImage(  image, 
-                                            x * widthOfOnePiece, 
-                                            y * heightOfOnePiece, 
-                                            widthOfOnePiece, 
-                                            heightOfOnePiece, 
-                                            0, 0, 
-                                            canvas.width, 
-                                            canvas.height
-                        );
-                        imagePieces.push(canvas.toDataURL());
-                    }
-                }
+                ctx.drawImage(img,0,0,800,500);
+                // 800/50 = 16
+                // 500/50 = 10
+                //  sX sY Width Height placeX placeY width heigth
 
-                // imagePieces now contains data urls of all the pieces of the image
+                //     for(var x = 0; x < 800; x+50)
+                //        for(var y = 0; y < 500; y+50)
+/* 
+                ctx.drawImage(img,0,0,50,50,0,0,50,50);
+                ctx.drawImage(img,50,0,50,50,50,0,50,50);
+                //             X        X  X       X  X => endrer seg ikke
+                //                x  y       x  y       => endrer seg => for loops
+                // forloop +50
+                // HVORDAN FÅR BRUKER GJORT TING / INTERACTION
+*/              // KLIKKE PÅ BRIKKE OG BYTTE MED NESTE MAN TRYKKER PÅ
+}
 
-                // load one piece onto the page
-                var anImageElement = document.getElementsByName('canvas');
-                anImageElement.src = imagePieces[0];
-            }
+
+            
+
 
         </script>
     </body>
