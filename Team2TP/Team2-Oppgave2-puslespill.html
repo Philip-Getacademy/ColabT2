@@ -1,20 +1,29 @@
-<html>
+<!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
 <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+    #randomPuzzle {
+        display: grid;
 
+    }
     h1 {
         text-align: center;
     }
-
     .puzzle {
         background-image:url(happyImage.jpg);
         float: left;
-        width:500px;
-        height:250px;
+        height:184px;
+        width:326px;
         background-repeat: no-repeat;
-    
+        background-position: 0% 0%;
     }
-
+    
 
 
 </style>
@@ -28,47 +37,152 @@
 
     <h1>Puslespill</h1>
     <div id="randomPuzzle"></div>
-    <button onclick="applyPuzzlePieces()">Trykk</button>
+
 <script>
-/*
-             Disse må inn i et script 
-            #piece1 {
-            background-image:url(happyImage.jpg);    
-            background-position: 0px 0px;
-            background-repeat: no-repeat;
-            }
-            #piece2 {
-            background-image:url(happyImage.jpg);
-            background-position: -250px 0px;
-            background-repeat: no-repeat;
-            }
-            #piece3 {
-            background-image:url(happyImage.jpg);
-            background-position: 0px -250px;
-            background-repeat: no-repeat;
-            }
-            #piece4 {
-            background-image:url(happyImage.jpg);
-            background-position:-500px -250px;
-            background-repeat: no-repeat;
-            }
-*/
+
+
 var x = 0;
 var y = 0;
+
 var i = 0;
-var iCount = 4;
+var iCount = 9;
+
+var randomPiece;
+var pieceSelected;
+var firstPiece;
+var secondPiece;
+var tempPiece;
+var trueGate = false;
+
+// DIV AND STYLE GENERATOR
 generatePuzzlePieces();
-function generatePuzzlePieces (x, y) {
+function generatePuzzlePieces () {
     for (i; i < iCount; i++) {  
-        document.getElementById('randomPuzzle').innerHTML += `<div class="puzzle" id="piece${i}"></div>`;
+        document.getElementById('randomPuzzle').innerHTML += `<div class="puzzle" id="piece${i}" onclick="selectPiece(this)"></div>`;
         document.head.innerHTML += `<style> #puzzle${i} { margin:0; } </style>`;
+
+        if ((iCount % 3) == 0) {
+            var ting = iCount / 3;  
+            document.getElementById('randomPuzzle').style.setProperty('grid-template-columns', `repeat(${ting}, 0fr)`);
+            document.getElementById('randomPuzzle').style.setProperty('grid-template-rows', `repeat(${ting}, 0fr)`);
+            document.getElementById('randomPuzzle').style.height = "978px";
+        }
+
+        if ((iCount % 4) == 0) {
+        var ting = iCount / 4;  
+        document.getElementById('randomPuzzle').style.setProperty('grid-template-columns', `repeat(${ting}, 0fr)`);
+        document.getElementById('randomPuzzle').style.setProperty('grid-template-rows', `repeat(${ting}, 0fr)`);
+        document.getElementById('randomPuzzle').style.height = "977px";
+        }    
+    }
+
+randomizePuzzle();
+}
+
+
+function randomizePuzzle () {
+    for (var r = 0; r < iCount; r++) {
+        console.log('wtf')
+        //piece => r, top bottom left right center 
+//        randomizePiece();
+//        document.getElementById('piece'${r}).style = randomPiece;
+    
+        if (iCount == 9 ) {
+            if (r == 0 || r == 3 || r == 6) {
+                x = 0;
+            }
+            else if (r == 1 || r == 4 || r == 7) {
+                x = 50;
+            }
+            else if (r == 2 || r == 5 || r == 8) {
+                x = 100;
+            }
+            document.getElementById('piece'+r).style.setProperty('background-position', x + "% " + y + "% ");
+            
+            
+            if(x == 100 ) {
+                console.log('x == 100 triggered, x value = '+x)
+                x = 0;
+   
+            }
+            else if (r > 2 && r < 7) {
+                console.log('for loop 0, y value = '+y)
+                y += 50;
+            }
+                     
+        }
+        
+
+    // IF iCount = 4 => for0 X = 0
+    //                  for1 X = 100
+
+
+
+    // IF iCount = 9 => for0 X = 0
+    //                  for1 X = 50
+    //                  for2 X = 100
+    
+    // IF iCount = 
+    
+    // IF 
+    /*
+
+
+
+
+        document.getElementById('piece0').style.backgroundPosition = " 0% 0%";
+        document.getElementById('piece1').style.backgroundPosition = " 50% 0%";
+        document.getElementById('piece2').style.backgroundPosition = " 100% 0%";
+        document.getElementById('piece3').style.backgroundPosition = " 0% 50%";
+        document.getElementById('piece4').style.backgroundPosition = " 50% 50%";
+        document.getElementById('piece5').style.backgroundPosition = " 100% 50%";
+        document.getElementById('piece6').style.backgroundPosition = " 0% 100%";
+        document.getElementById('piece7').style.backgroundPosition = " 50% 100%";
+        document.getElementById('piece8').style.backgroundPosition = " 100% 100%";
+    */  
     }
 }
 
 /*
-function applyPuzzlePieces() {
-//    background-position: ${x + "px " + y + "px"};
+function randomizePiece() {
+
+
+        
+        randomPiece = 0;
+
+        // RANDOM NUMBER
+            // CASE 
+
+        if (iCount == 4) {
+            // top left
+            // top right
+            // bottom left
+            // bottom right
+        }
+        if (iCount == 9) {
+            // top left
+            // top center
+            // top right....
+        }
 }
+*/
+// PIECE SWITCHER
+function selectPiece(switchPiece) {             
+
+    if(trueGate == true) {
+        secondPiece = switchPiece;
+        tempPiece = secondPiece.outerHTML;
+        secondPiece.outerHTML = firstPiece.outerHTML;
+        firstPiece.outerHTML = tempPiece;  
+        trueGate = false;
+    }
+    else {
+        firstPiece = switchPiece;
+        trueGate = true;
+    }
+}
+/*
+
 */
 
 </script>
