@@ -1,8 +1,123 @@
-<html>
-    <head>
+<!DOCTYPE html><head>
+<meta charset="UTF-8">
 
-    </head>
-    <body>
+<style>
+    
+body {
+    background-color: grey;
+}
+
+#historie {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px
+}
+
+h4 {
+    margin: 0;
+    padding : 3px;
+    width: auto;
+    height: 30px;
+    border-radius: 10px;
+    background-color: indianred;
+}
+
+#text1, #text2, #text3, #choice {
+    display: flex;
+    margin-top: 30px;
+    
+}
+
+
+</style>
+
+</head><body>
+
+    <div id="historie"></div>
+
+<script>
+
+    //Model
+    var trueGate = false;
+    var randomPiece;
+    var pieceSelected;
+    var firstPiece;
+    var secondPiece;
+    var tempPiece;
+    var trueGate;
+
+    //View
+    updateVeiw();
+    function updateVeiw() {
+        document.getElementById('historie').innerHTML = `
+        <div id="text1">
+            <h4>Det var en liten </h4>
+                <h4 onclick="wordClick(this)" id="h4">____</h4> 
+            <h4>som ikke ville </h4> 
+                <h4 onclick="wordClick(this)" id="h4">____</h4> 
+            <h4>fordi det var </h4>
+                <h4 onclick="wordClick(this)" id="h4">____</h4>
+            
+        </div>
         
-    </body>
-</html>
+        <div id="text2"> 
+            <h4>Fisken syntes at </h4> 
+                <h4 onclick="wordClick(this)" id="h4">____</h4> 
+            <h4> Ikke kan de spises eller noen ting.</h4>
+        
+        </div>
+        
+        
+        <div id="text3">
+            <h4>Katten tenker : </h4>
+                <h4 onclick="wordClick(this)" id="h4">____</h4>
+            
+        </div>
+        
+        <div id="choice"> 
+            <h4 onclick="wordClick(this)" > gammel man </h4>
+            <h4 onclick="wordClick(this)" > løpe </h4> 
+            <h4 onclick="wordClick(this)" > jævlig varmt. </h4>
+
+            <h4 onclick="wordClick(this)" > gamle sokker er søppel. </h4> 
+
+            
+            <h4 onclick="wordClick(this)" > Hva faen? </h4> 
+            
+        </div>
+        
+
+
+    
+        
+        `;
+
+
+        
+    }
+
+    
+    //Controller
+    function wordClick(switchPiece) {
+
+
+        if(trueGate == true && !(secondPiece == firstPiece)) {
+        secondPiece = switchPiece;
+        tempPiece = secondPiece.outerHTML;
+        secondPiece.outerHTML = firstPiece.outerHTML;
+        firstPiece.outerHTML = tempPiece;  
+        trueGate = false;
+        }
+        
+        else {
+        firstPiece = switchPiece;
+        trueGate = true;
+    }
+}
+    
+
+
+
+</script>
+</body></html>
