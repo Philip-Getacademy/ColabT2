@@ -4,31 +4,56 @@
 <style>
     
 body {
-    background-color: grey;
+    background-color: rgb(235, 236, 220);
 }
 
 #historie {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding: 20px
+    padding: 20px;   
 }
 
 h4 {
     margin: 0;
-    padding : 3px;
+    margin-right: 10px;
+    padding : 2px;
+    padding-bottom: 5px;
     width: auto;
-    height: 30px;
-    border-radius: 10px;
-    background-color: indianred;
+    height: 18px;
+    background-color: rgb(142, 144, 143);
 }
 
 #text1, #text2, #text3, #choice {
+
     display: flex;
-    margin-top: 30px;
-    
+    margin-left: 30px;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
+#choice {
+
+    margin-left: 42px;
+}
+
+#choice h4 {
+    margin-right: 10px;
+}
+
+input {
+    margin-left: -20px;
+    margin-right: 20px;
+}
+
+button {
+
+    height: 25px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: 42px;
+
+}
 
 </style>
 
@@ -39,6 +64,11 @@ h4 {
 <script>
 
     //Model
+
+    var textSelected = [];
+    var text1Solution = "Det var en gang en jævel katt som ikke ville sove fordi det var sokker .";
+    var testvariabel;
+
     var trueGate = false;
     var randomPiece;
     var pieceSelected;
@@ -51,56 +81,84 @@ h4 {
     updateVeiw();
     function updateVeiw() {
         document.getElementById('historie').innerHTML = `
+        
         <div id="text1">
-            <h4>Det var en liten </h4>
-                <h4 onclick="wordClick(this)" id="h4">____</h4> 
-            <h4>som ikke ville </h4> 
-                <h4 onclick="wordClick(this)" id="h4">____</h4> 
-            <h4>fordi det var </h4>
-                <h4 onclick="wordClick(this)" id="h4">____</h4>
-            
+            <input type="radio" name="sentence" onchange="radio(this)">
+            <h4>Det var en gang en</h4>
+                <h4 onclick="wordClick(this)" id="h4">___</h4> 
+                <h4 onclick="wordClick(this)" id="h4">___</h4> 
+            <h4>som ikke ville</h4> 
+                <h4 onclick="wordClick(this)" id="h4">___</h4> 
+            <h4>fordi det var</h4>
+                <h4 onclick="wordClick(this)" id="h4">___</h4>
+            <h4>.</h4>  
         </div>
         
-        <div id="text2"> 
-            <h4>Fisken syntes at </h4> 
-                <h4 onclick="wordClick(this)" id="h4">____</h4> 
-            <h4> Ikke kan de spises eller noen ting.</h4>
         
+        <div id="text2">
+            <input type="radio" name="sentence" onchange="radio(this)">
+            <h4>Fisken er ikke glad i </h4> 
+                <h4 onclick="wordClick(this)" id="h4">___</h4> 
+            <h4> fordi det ikke kan spises.</h4>
+            <h4>Da blir det </h4> 
+                <h4 onclick="wordClick(this)" id="h4">___</h4> 
+            <h4> tilstander.</h4> 
         </div>
         
         
         <div id="text3">
+            <input type="radio" name="sentence" onchange="radio(this)">
             <h4>Katten tenker : </h4>
-                <h4 onclick="wordClick(this)" id="h4">____</h4>
-            
+                <h4 onclick="wordClick(this)" id="h4">___</h4>
+                <h4 onclick="wordClick(this)" id="h4">___</h4>
+            <h4>er ikke </h4>
+                <h4 onclick="wordClick(this)" id="h4">___</h4> 
+                <h4 onclick="wordClick(this)" id="h4">___</h4>
+            <h4> .</h4>  
         </div>
+        
         
         <div id="choice"> 
-            <h4 onclick="wordClick(this)" > gammel man </h4>
-            <h4 onclick="wordClick(this)" > løpe </h4> 
-            <h4 onclick="wordClick(this)" > jævlig varmt. </h4>
+            <h4 onclick="wordClick(this)" >varmt</h4>
+            <h4 onclick="wordClick(this)" >gamle</h4>
+            <h4 onclick="wordClick(this)" >sokker</h4>
+            <h4 onclick="wordClick(this)" >ingen</h4>
+            <h4 onclick="wordClick(this)" >seng</h4>
 
-            <h4 onclick="wordClick(this)" > gamle sokker er søppel. </h4> 
+            <h4 onclick="wordClick(this)" >gamle</h4> 
+            <h4 onclick="wordClick(this)" >sokker</h4> 
+            <h4 onclick="wordClick(this)" >søppel</h4> 
 
-            
-            <h4 onclick="wordClick(this)" > Hva faen? </h4> 
+            <h4 onclick="wordClick(this)" >faen</h4> 
+            <h4 onclick="wordClick(this)" >hva</h4> 
             
         </div>
-        
 
+       
+        <div id="choice"> 
+            <h4 onclick="wordClick(this)" >gammel</h4>
+            <h4 onclick="wordClick(this)" >man</h4>
+            <h4 onclick="wordClick(this)" >draps</h4>
+            <h4 onclick="wordClick(this)" >katt</h4>
+            <h4 onclick="wordClick(this)" >mat</h4>
+            
+            <h4 onclick="wordClick(this)" >løpe</h4> 
+            <h4 onclick="wordClick(this)" >spise</h4> 
+            <h4 onclick="wordClick(this)" >sove</h4> 
+            
+            <h4 onclick="wordClick(this)" >jævel</h4>         
+        </div>
 
-    
-        
-        `;
-
-
-        
+        <div>
+            <button onclick="checkSentence()">Sjekk valgt setning!</button>
+        </div>
+        <p id="output">${textSelected}</p>
+        <p id="solution">${text1Solution}</p>
+        `;   
     }
-
     
     //Controller
     function wordClick(switchPiece) {
-
 
         if(trueGate == true && !(secondPiece == firstPiece)) {
         secondPiece = switchPiece;
@@ -115,9 +173,32 @@ h4 {
         trueGate = true;
     }
 }
-    
 
 
+    function checkSentence(selectedSentence) {
 
+        document.getElementById('output').innerHTML = textSelected;
+        textSelected.search(".")
+        testvariabel = textSelected;
+        updateVeiw();
+    }
+
+    function radio(input) {
+
+        if(textSelected != "") {
+            textSelected = [];
+        }
+        if(textSelected == "") {
+            for(let i = 0; i < input.parentElement.children.length; i++) { 
+                textSelected[i-1] = input.parentElement.children[i].innerHTML;    
+            }
+            
+        }
+        
+        textSelected = textSelected.toString();
+        
+        return (textSelected = textSelected.replace(/,/g, " ")); 
+
+    }
 </script>
 </body></html>
