@@ -1,0 +1,103 @@
+<html>
+    
+<head>
+<style>
+    body {
+        background-color: #5D5C61;
+    }
+    img {
+        height: 200px;
+        width: 200px;
+        
+    }
+
+    .container {
+    position: relative;
+    width: 45%;
+    }
+    
+    .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 35%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+    }
+
+    .container:hover .overlay {
+    opacity: 0.5;
+    }
+
+    .text {
+    color: white;
+    font-size: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    }
+</style>
+</head>
+
+
+<body>
+    <div class="container">
+        <img src="rock.png" alt="Avatar" class="image">
+        <div class="overlay">
+          <div class="text">THE ROCK</div>
+        </div>
+    </div>
+    <h1> hei hei</h1>
+
+<img onclick="selectedValue = 'rock'" src="rock.png">
+<img onclick="selectedValue = 'paper'" src="paper.png">
+<img onclick="selectedValue = 'scissors'" src="scissors.png">
+</body>
+
+
+<script>
+//model
+let selectedValue;
+let generatedValue;
+
+/*    
+if (selectedValue == generatedValue) gameStatus = "draw";
+
+if (selectedValue != generatedValue) {
+	if(selectedValue == "stein" && generatedValue == "saks") gameStatus = "Du vant";
+	else gameStatus = "Du tapte";
+
+	if(selectedValue == "saks" && generatedValue == "papir") gameStatus = "Du vant";
+	else gameStatus = "Du tapte";
+
+	if(selectedValue == "papir" && generatedValue == "stein") gameStatus = "Du vant";
+	else gameStatus = "Du tapte";		
+}
+*/
+</script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
