@@ -21,7 +21,7 @@ h4 {
     padding-bottom: 5px;
     width: auto;
     height: 18px;
-    background-color: rgb(142, 144, 143);
+    background-color: rgb(255, 255, 255);
 }
 
 #text1, #text2, #text3, #choice {
@@ -67,7 +67,14 @@ button {
 
     var textSelected = [];
     var text1Solution = "Det var en gang en jævel katt som ikke ville sove fordi det var sokker .";
+    var text2Solution = "Fisken er ikke glad i mat fordi det ikke kan spises. Da blir det draps tilstander.";
+    var text3Solution = "Katten tenker : gamle gammel er ikke gamle man .";
+    
     var testvariabel;
+
+    var text1 = '';
+    var text2 = '';
+    var text3 = '';
 
     var trueGate = false;
     var randomPiece;
@@ -80,9 +87,10 @@ button {
     //View
     updateVeiw();
     function updateVeiw() {
+        
         document.getElementById('historie').innerHTML = `
         
-        <div id="text1">
+        <div id="text1" style="background-color :${text1};">
             <input type="radio" name="sentence" onchange="radio(this)">
             <h4>Det var en gang en</h4>
                 <h4 onclick="wordClick(this)" id="h4">___</h4> 
@@ -95,66 +103,72 @@ button {
         </div>
         
         
-        <div id="text2">
+        <div id="text2" style="background-color :${text2};">
             <input type="radio" name="sentence" onchange="radio(this)">
-            <h4>Fisken er ikke glad i </h4> 
+            <h4>Fisken er ikke glad i</h4> 
                 <h4 onclick="wordClick(this)" id="h4">___</h4> 
-            <h4> fordi det ikke kan spises.</h4>
-            <h4>Da blir det </h4> 
+            <h4>fordi det ikke kan spises.</h4>
+            <h4>Da blir det</h4> 
                 <h4 onclick="wordClick(this)" id="h4">___</h4> 
-            <h4> tilstander.</h4> 
+            <h4>tilstander.</h4> 
         </div>
         
         
-        <div id="text3">
+        <div id="text3" style="background-color :${text3};">
             <input type="radio" name="sentence" onchange="radio(this)">
-            <h4>Katten tenker : </h4>
+            <h4>Katten tenker :</h4>
                 <h4 onclick="wordClick(this)" id="h4">___</h4>
                 <h4 onclick="wordClick(this)" id="h4">___</h4>
-            <h4>er ikke </h4>
+            <h4>er ikke</h4>
                 <h4 onclick="wordClick(this)" id="h4">___</h4> 
                 <h4 onclick="wordClick(this)" id="h4">___</h4>
-            <h4> .</h4>  
+            <h4>.</h4>  
         </div>
         
         
         <div id="choice"> 
-            <h4 onclick="wordClick(this)" >varmt</h4>
-            <h4 onclick="wordClick(this)" >gamle</h4>
-            <h4 onclick="wordClick(this)" >sokker</h4>
-            <h4 onclick="wordClick(this)" >ingen</h4>
-            <h4 onclick="wordClick(this)" >seng</h4>
+            <h4 onclick="wordClick(this)">varmt</h4>
+            <h4 onclick="wordClick(this)">gamle</h4>
+            <h4 onclick="wordClick(this)">sokker</h4>
+            <h4 onclick="wordClick(this)">ingen</h4>
+            <h4 onclick="wordClick(this)">seng</h4>
 
-            <h4 onclick="wordClick(this)" >gamle</h4> 
-            <h4 onclick="wordClick(this)" >sokker</h4> 
-            <h4 onclick="wordClick(this)" >søppel</h4> 
+            <h4 onclick="wordClick(this)">gamle</h4> 
+            <h4 onclick="wordClick(this)">sokker</h4> 
+            <h4 onclick="wordClick(this)">søppel</h4> 
 
-            <h4 onclick="wordClick(this)" >faen</h4> 
-            <h4 onclick="wordClick(this)" >hva</h4> 
+            <h4 onclick="wordClick(this)">faen</h4> 
+            <h4 onclick="wordClick(this)">hva</h4> 
             
         </div>
 
        
         <div id="choice"> 
-            <h4 onclick="wordClick(this)" >gammel</h4>
-            <h4 onclick="wordClick(this)" >man</h4>
-            <h4 onclick="wordClick(this)" >draps</h4>
-            <h4 onclick="wordClick(this)" >katt</h4>
-            <h4 onclick="wordClick(this)" >mat</h4>
+            <h4 onclick="wordClick(this)">gammel</h4>
+            <h4 onclick="wordClick(this)">man</h4>
+            <h4 onclick="wordClick(this)">draps</h4>
+            <h4 onclick="wordClick(this)">katt</h4>
+            <h4 onclick="wordClick(this)">mat</h4>
             
-            <h4 onclick="wordClick(this)" >løpe</h4> 
-            <h4 onclick="wordClick(this)" >spise</h4> 
-            <h4 onclick="wordClick(this)" >sove</h4> 
+            <h4 onclick="wordClick(this)">løpe</h4> 
+            <h4 onclick="wordClick(this)">spise</h4> 
+            <h4 onclick="wordClick(this)">sove</h4> 
             
-            <h4 onclick="wordClick(this)" >jævel</h4>         
+            <h4 onclick="wordClick(this)">jævel</h4>         
         </div>
 
         <div>
             <button onclick="checkSentence()">Sjekk valgt setning!</button>
         </div>
-        <p id="output">${textSelected}</p>
-        <p id="solution">${text1Solution}</p>
-        `;   
+
+        
+        `;
+   
+        // <p id="output">${textSelected}</p>
+        // <p id="solution">${text1Solution}</p>
+        // <p id="solution">${text2Solution}</p>
+        // <p id="solution">${text3Solution}</p>
+        // <p id="solution">${text3Solution}</p>
     }
     
     //Controller
@@ -177,9 +191,14 @@ button {
 
     function checkSentence(selectedSentence) {
 
-        document.getElementById('output').innerHTML = textSelected;
-        textSelected.search(".")
-        testvariabel = textSelected;
+        // document.getElementById('output').innerHTML = textSelected;
+        // textSelected.search(".")
+
+
+        if(textSelected === text1Solution) text1 = "Green";
+        if(textSelected === text2Solution) text2 = "Green";
+        if(textSelected === text3Solution) text3 = "Green";
+
         updateVeiw();
     }
 
@@ -188,17 +207,18 @@ button {
         if(textSelected != "") {
             textSelected = [];
         }
+
         if(textSelected == "") {
             for(let i = 0; i < input.parentElement.children.length; i++) { 
                 textSelected[i-1] = input.parentElement.children[i].innerHTML;    
             }
             
         }
-        
-        textSelected = textSelected.toString();
-        
-        return (textSelected = textSelected.replace(/,/g, " ")); 
 
+        textSelected = textSelected.toString();
+        ;
+
+    return (textSelected = textSelected.replace(/,/g, " ")); 
     }
 </script>
 </body></html>
