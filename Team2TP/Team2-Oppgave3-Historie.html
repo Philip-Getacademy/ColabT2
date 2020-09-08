@@ -160,8 +160,6 @@ button {
         <div>
             <button onclick="checkSentence()">Sjekk valgt setning!</button>
         </div>
-
-        
         `;
    
         // <p id="output">${textSelected}</p>
@@ -185,8 +183,8 @@ button {
         else {
         firstPiece = switchPiece;
         trueGate = true;
+        }
     }
-}
 
 
     function checkSentence(selectedSentence) {
@@ -212,11 +210,10 @@ button {
             for(let i = 0; i < input.parentElement.children.length; i++) { 
                 textSelected[i-1] = input.parentElement.children[i].innerHTML;    
             }
-            
         }
 
         textSelected = textSelected.toString();
-        ;
+        
 
     return (textSelected = textSelected.replace(/,/g, " ")); 
     }
