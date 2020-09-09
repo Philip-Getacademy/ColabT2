@@ -3,89 +3,184 @@
 <head>
 <style>
     body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         background-color: #5D5C61;
     }
+
+    #player, #computer {
+        display: flex;
+        flex-direction: column;
+    }
+
+
     img {
         height: 200px;
         width: 200px;
-        
     }
 
     .container {
-    position: relative;
-    width: 45%;
-    }
-    
-    .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 35%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #008CBA;
+        height: 200px;
+        width: 200px;
     }
 
-    .container:hover .overlay {
+    
+    .container:hover .text {
     opacity: 0.5;
     }
 
+    .container:hover  {
+        background-color: rgba(255,0,255,0.3);
+    }
+
+
     .text {
     color: white;
+    opacity: 0;
+    transition: .5s ease;
     font-size: 50px;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
     }
+
+    .text:hover {
+        opacity: 0;
+    }
+
 </style>
 </head>
 
-
 <body>
+<div id="player">
     <div class="container">
-        <img src="rock.png" alt="Avatar" class="image">
-        <div class="overlay">
-          <div class="text">THE ROCK</div>
-        </div>
+        <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
+        <img onclick="selectedValue(this.value = 'rock')" src="rock.png" >
+        
     </div>
-    <h1> hei hei</h1>
+    <div class="container">
+        <!-- <div class="text">Will you choose :<br> The Paper?</div> -->
+        <img onclick="selectedValue(this.value = 'paper')" src="paper.png" >
+        
+    </div>
+    <div class="container" >
+        <!-- <div class="text">Will you choose :<br> The Scissors?</div> -->
+        <img onclick="selectedValue(this.value = 'scissors')" src="scissors.png" > 
+    </div>
+</div>
+<p id="gameStatusMessage"></p>
+<div id="computer">
+    <div class="container">
+        <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
+        <img src="rock.png">
+        
+    </div>
+    <div class="container">
+        <!-- <div class="text">Will you choose :<br> The Paper?</div> -->
+        <img src="paper.png">
+        
+    </div>
+    <div class="container">
+        <!-- <div class="text">Will you choose :<br> The Scissors?</div> -->
+        <img src="scissors.png"> 
+    </div>
+</div>
 
-<img onclick="selectedValue = 'rock'" src="rock.png">
-<img onclick="selectedValue = 'paper'" src="paper.png">
-<img onclick="selectedValue = 'scissors'" src="scissors.png">
+
 </body>
 
 
 <script>
+
 //model
-let selectedValue;
+
 let generatedValue;
+let mouseIsOverRock = mouseIsOverPaper = mouseIsOverScissors = false;
 
-/*    
-if (selectedValue == generatedValue) gameStatus = "draw";
+let valueSelected;
+let gameStatus;
 
-if (selectedValue != generatedValue) {
-	if(selectedValue == "stein" && generatedValue == "saks") gameStatus = "Du vant";
-	else gameStatus = "Du tapte";
+let computerPicked = document.getElementById('computer');
+let playerPicked = document.getElementById('player');
 
-	if(selectedValue == "saks" && generatedValue == "papir") gameStatus = "Du vant";
-	else gameStatus = "Du tapte";
 
-	if(selectedValue == "papir" && generatedValue == "stein") gameStatus = "Du vant";
-	else gameStatus = "Du tapte";		
+function colorComputer() {
+    if(generatedValue == "rock");
 }
-*/
-</script>
 
 
-</html>
+function selectedValue(playerSelected) {
+    valueSelected = playerSelected;
+    
+    if (valueSelected == "rock") {
+        playerPicked.children[0].style.backgroundColor = "grey";
+        playerPicked.children[1].style.backgroundColor = "";
+        playerPicked.children[2].style.backgroundColor = "";
+    } 
+    if (valueSelected == "paper") {
+        playerPicked.children[0].style.backgroundColor = "";
+        playerPicked.children[1].style.backgroundColor = "white";
+        playerPicked.children[2].style.backgroundColor = "";
+    } 
+    if (valueSelected == "scissors") {
+        playerPicked.children[0].style.backgroundColor = "";
+        playerPicked.children[1].style.backgroundColor = "";
+        playerPicked.children[2].style.backgroundColor = "lightblue";
+    } 
+
+    computerSelect();
+}
+
+function computerSelect() {
+    
+    let computer = Math.floor(Math.random() * 3) + 1;
+
+    if (computer == 1) {
+        generatedValue = "rock";
+        computerPicked.children[0].style.backgroundColor = "grey";
+        computerPicked.children[1].style.backgroundColor = "";
+        computerPicked.children[2].style.backgroundColor = "";
+    } 
+    if (computer == 2) {
+        generatedValue = "paper"; 
+        computerPicked.children[0].style.backgroundColor = "";
+        computerPicked.children[1].style.backgroundColor = "white";
+        computerPicked.children[2].style.backgroundColor = "";
+    } 
+    if (computer == 3) {
+        generatedValue = "scissors";
+        computerPicked.children[0].style.backgroundColor = "";
+        computerPicked.children[1].style.backgroundColor = "";
+        computerPicked.children[2].style.backgroundColor = "lightblue";
+    } 
+    comparePlayerValues();
+}
+
+function comparePlayerValues() {
+    gameStatus = '';
+    if (valueSelected == generatedValue) gameStatus = "draw";
+
+    if (valueSelected !== generatedValue) {
+        if((valueSelected === "scissors") && (generatedValue === "paper")) gameStatus = "Du vant";
+        else gameStatus = "Du tapte";
+
+        if((valueSelected === "rock") && (generatedValue === "scissors")) gameStatus = "Du vant"; 
+        else gameStatus = "Du tapte";
+
+        if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "Du vant";
+        else gameStatus = "Du tapte";
+    }
+
+    document.getElementById('gameStatusMessage').innerHTML = gameStatus;
+}
+
+
+</script></html>
 
 
 
