@@ -14,7 +14,6 @@
         flex-direction: column;
     }
 
-
     img {
         height: 200px;
         width: 200px;
@@ -24,8 +23,10 @@
         height: 200px;
         width: 200px;
     }
+    h1 {
+        font-size: 200px;
+    }
 
-    
     .container:hover .text {
     opacity: 0.5;
     }
@@ -33,7 +34,6 @@
     .container:hover  {
         background-color: rgba(255,0,255,0.3);
     }
-
 
     .text {
     color: white;
@@ -90,11 +90,7 @@
         <img src="scissors.png"> 
     </div>
 </div>
-
-
 </body>
-
-
 <script>
 
 //model
@@ -112,7 +108,6 @@ let playerPicked = document.getElementById('player');
 function colorComputer() {
     if(generatedValue == "rock");
 }
-
 
 function selectedValue(playerSelected) {
     valueSelected = playerSelected;
@@ -172,24 +167,6 @@ function comparePlayerValues() {
         else if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "<h1>Du vant</h1>";
         else gameStatus = "<h1>Du tapte</h1>";
     }
-
     document.getElementById('gameStatusMessage').innerHTML = gameStatus;
 }
-
-
 </script></html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
