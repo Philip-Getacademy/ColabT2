@@ -163,14 +163,14 @@ function computerSelect() {
 
 function comparePlayerValues() {
     gameStatus = '';
-    if (valueSelected == generatedValue) gameStatus = "draw";
+    if (valueSelected == generatedValue) gameStatus = "<h1>draw</h1>";
 
     if (valueSelected !== generatedValue) {
         
-        if((valueSelected === "scissors") && (generatedValue === "paper")) gameStatus = "Du vant";
-        else if((valueSelected === "rock") && (generatedValue === "scissors")) gameStatus = "Du vant"; 
-        else if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "Du vant";
-        else gameStatus = "Du tapte";
+        if((valueSelected === "scissors") && (generatedValue === "paper")) gameStatus = "<h1>Du vant</h1>";
+        else if((valueSelected === "rock") && (generatedValue === "scissors")) gameStatus = "<h1>Du vant</h1>"; 
+        else if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "<h1>Du vant</h1>";
+        else gameStatus = "<h1>Du tapte</h1>";
     }
 
     document.getElementById('gameStatusMessage').innerHTML = gameStatus;
