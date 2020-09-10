@@ -166,13 +166,10 @@ function comparePlayerValues() {
     if (valueSelected == generatedValue) gameStatus = "draw";
 
     if (valueSelected !== generatedValue) {
+        
         if((valueSelected === "scissors") && (generatedValue === "paper")) gameStatus = "Du vant";
-        else gameStatus = "Du tapte";
-
-        if((valueSelected === "rock") && (generatedValue === "scissors")) gameStatus = "Du vant"; 
-        else gameStatus = "Du tapte";
-
-        if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "Du vant";
+        else if((valueSelected === "rock") && (generatedValue === "scissors")) gameStatus = "Du vant"; 
+        else if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "Du vant";
         else gameStatus = "Du tapte";
     }
 
