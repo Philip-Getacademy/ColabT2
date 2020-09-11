@@ -2,18 +2,32 @@
     
 <head>
 <style>
-    body {
+    html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #5D5C61;
+    }
+
+    #content { 
+        height: 85vh;
+        display: flex;
+        flex-direction: column;  
+    }
+
+    #superAligner {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: #5D5C61;
     }
 
     #player, #computer {
         display: flex;
         flex-direction: column;
     }
-
+ 
+    #computer {
+        transform: scaleX(-1);
+    }
 
     img {
         height: 200px;
@@ -34,6 +48,12 @@
         background-color: rgba(255,0,255,0.3);
     }
 
+    p {
+        padding: 0;
+        margin: 0;
+        align-self: center;
+        font-size: 5em;
+    }
 
     .text {
     color: white;
@@ -57,139 +77,133 @@
 </head>
 
 <body>
-<div id="player">
-    <div class="container">
-        <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
-        <img onclick="selectedValue(this.value = 'rock')" src="rock.png" >
-        
-    </div>
-    <div class="container">
-        <!-- <div class="text">Will you choose :<br> The Paper?</div> -->
-        <img onclick="selectedValue(this.value = 'paper')" src="paper.png" >
-        
-    </div>
-    <div class="container" >
-        <!-- <div class="text">Will you choose :<br> The Scissors?</div> -->
-        <img onclick="selectedValue(this.value = 'scissors')" src="scissors.png" > 
-    </div>
-</div>
-<p id="gameStatusMessage"></p>
-<div id="computer">
-    <div class="container">
-        <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
-        <img src="rock.png">
-        
-    </div>
-    <div class="container">
-        <!-- <div class="text">Will you choose :<br> The Paper?</div> -->
-        <img src="paper.png">
-        
-    </div>
-    <div class="container">
-        <!-- <div class="text">Will you choose :<br> The Scissors?</div> -->
-        <img src="scissors.png"> 
-    </div>
-</div>
-
+<div id="content"></div>
 
 </body>
-
 
 <script>
 
 //model
-
-let generatedValue;
-let mouseIsOverRock = mouseIsOverPaper = mouseIsOverScissors = false;
-
-let valueSelected;
-let gameStatus;
-
-let computerPicked = document.getElementById('computer');
-let playerPicked = document.getElementById('player');
+var content = document.getElementById('content');
+var playerCss;
+var computerCss; 
 
 
-function colorComputer() {
-    if(generatedValue == "rock");
-}
+// CSS variabler for view oppdatert fra kontroller til player og computer
+let computerPickedRock;
+let computerPickedPaper;
+let computerPickedScissors;
+
+let playerPickedRock;
+let playerPickedPaper;
+let playerPickedScissors;
+
+// Sammenlinkingsvariabler for gameStatus fra kontroller til player og computer
+let computerPicked;
+let playerPicked;
+
+// Checking if game is ready
+// Finn en bedre løsning enn trueGate
+let gameStatus = true;
+let gameMessage = '';
 
 
-function selectedValue(playerSelected) {
-    valueSelected = playerSelected;
+//view 
+view();
+function view() {
+
+    let gameStatusMessage = gameStatus === true ? 'Pick an object' : gameMessage; // Game Won || Game Lost || Draw
     
-    if (valueSelected == "rock") {
-        playerPicked.children[0].style.backgroundColor = "grey";
-        playerPicked.children[1].style.backgroundColor = "";
-        playerPicked.children[2].style.backgroundColor = "";
-    } 
-    if (valueSelected == "paper") {
-        playerPicked.children[0].style.backgroundColor = "";
-        playerPicked.children[1].style.backgroundColor = "white";
-        playerPicked.children[2].style.backgroundColor = "";
-    } 
-    if (valueSelected == "scissors") {
-        playerPicked.children[0].style.backgroundColor = "";
-        playerPicked.children[1].style.backgroundColor = "";
-        playerPicked.children[2].style.backgroundColor = "lightblue";
-    } 
 
-    computerSelect();
+    content.innerHTML = `
+        <p>${(gameStatusMessage)}</p>
+
+        <div id="superAligner">
+
+            <div id="player">
+                <div class="container" style="background-color: ${playerPickedRock}">
+                    <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
+                    <img onclick="playerSelect(this.value = 'rock')" src="rock.png" >
+                    
+                </div>
+                <div class="container" style="background-color: ${playerPickedPaper}">
+                    <!-- <div class="text">Will you choose :<br> The Paper?</div> -->
+                    <img onclick="playerSelect(this.value = 'paper')" src="paper.png" >
+                    
+                </div>
+                <div class="container" style="background-color: ${playerPickedScissors}">
+                    <!-- <div class="text">Will you choose :<br> The Scissors?</div> -->
+                    <img onclick="playerSelect(this.value = 'scissors')" src="scissors.png" > 
+                </div>
+            </div>
+            
+            <div id="computer">
+                <div class="container" style="background-color: ${computerPickedRock}">
+                    <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
+                    <img src="rock.png">
+                    
+                </div>
+                <div class="container" style="background-color: ${computerPickedPaper}">
+                    <!-- <div class="text">Will you choose :<br> The Paper?</div> -->
+                    <img src="paper.png">
+                    
+                </div>
+                <div class="container" style="background-color: ${computerPickedScissors}">
+                    <!-- <div class="text">Will you choose :<br> The Scissors?</div> -->
+                    <img src="scissors.png"> 
+                </div>
+            </div>
+
+        </div>
+    `;
 }
+
+
+
+
+// Deklarerer playerPicked etter hvliklen man trykker på
+function playerSelect(playerSelected) {
+
+    computerPickedRock = computerPickedPaper = computerPickedScissors = ''; 
+    playerPickedRock = playerPickedPaper = playerPickedScissors = '';
+
+    gameStatus = true;
+    playerPicked = playerSelected;
+
+    // Turnary Operators?
+    if (playerPicked === 'rock') playerPickedRock = 'blue';
+    else if (playerPicked === 'paper') playerPickedPaper = 'white';
+    else playerPickedScissors = 'red';
+
+computerSelect();
+}
+
 
 function computerSelect() {
     
     let computer = Math.floor(Math.random() * 3) + 1;
 
-    if (computer == 1) {
-        generatedValue = "rock";
-        computerPicked.children[0].style.backgroundColor = "grey";
-        computerPicked.children[1].style.backgroundColor = "";
-        computerPicked.children[2].style.backgroundColor = "";
-    } 
-    if (computer == 2) {
-        generatedValue = "paper"; 
-        computerPicked.children[0].style.backgroundColor = "";
-        computerPicked.children[1].style.backgroundColor = "white";
-        computerPicked.children[2].style.backgroundColor = "";
-    } 
-    if (computer == 3) {
-        generatedValue = "scissors";
-        computerPicked.children[0].style.backgroundColor = "";
-        computerPicked.children[1].style.backgroundColor = "";
-        computerPicked.children[2].style.backgroundColor = "lightblue";
-    } 
-    comparePlayerValues();
-}
+    // Turnary Operators?
+    if (computer == 1) { computerPicked = "rock"; computerPickedRock = 'blue';} 
+    else if (computer == 2) { computerPicked = "paper"; computerPickedPaper = 'white';}
+    else { computerPicked = "scissors"; computerPickedScissors = 'red';}
+      
+comparePlayerValues();
+} 
 
 function comparePlayerValues() {
-    gameStatus = '';
-    if (valueSelected == generatedValue) gameStatus = "draw";
 
-    if (valueSelected !== generatedValue) {
+    if (playerPicked == computerPicked) gameMessage = "Uavgjort";
+    if (playerPicked !== computerPicked) {
         
-        if((valueSelected === "scissors") && (generatedValue === "paper")) gameStatus = "Du vant";
-        else if((valueSelected === "rock") && (generatedValue === "scissors")) gameStatus = "Du vant"; 
-        else if((valueSelected === "paper") && (generatedValue === "rock")) gameStatus = "Du vant";
-        else gameStatus = "Du tapte";
+        if((playerPicked === "scissors") && (computerPicked === "paper")) gameMessage = "Du vant";
+        else if((playerPicked === "rock") && (computerPicked === "scissors")) gameMessage = "Du vant"; 
+        else if((playerPicked === "paper") && (computerPicked === "rock")) gameMessage = "Du vant";
+        else gameMessage = "Du tapte";
     }
+    gameStatus = false;
 
-    document.getElementById('gameStatusMessage').innerHTML = gameStatus;
+view();
 }
 
-
 </script></html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
