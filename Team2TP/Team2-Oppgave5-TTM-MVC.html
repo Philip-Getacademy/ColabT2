@@ -1,0 +1,72 @@
+<html><head>
+
+    <style>
+        body { margin: 0;
+        }
+
+        #backgroundOne {
+            position: absolute;
+            border-left: 50vw solid rgba(240, 141, 48, 0.9);
+            border-right: 50vw solid transparent;
+            border-bottom: 50vh solid transparent;
+            border-top: 50vh solid rgba(240, 141, 48, 0.9);
+        }
+
+        #backgroundTwo {
+            position: absolute;
+            border-left: 50vw solid transparent;
+            border-right: 50vw solid rgba(34, 197, 34, 0.9);
+            border-bottom: 50vh solid rgba(34, 197, 34, 0.9);
+            border-top: 50vh solid transparent;
+        }
+
+        #app {
+            margin-top: 20vh;
+            margin-left: 20vw;
+            position: absolute;
+            height: 60vh;
+            width: 60vw;
+        }
+
+        
+
+    </style>
+    <script></script>
+
+</head><body>
+
+
+<script>
+
+//model
+
+//veiw
+
+show();
+function show() {
+
+    let content = `
+    
+        <div id="backgroundOne"></div>
+        <div id="backgroundTwo"></div>
+
+        <div id="app">
+            <input id="inputField" oninput="convertToMorse(this) || ''">
+            <div id="outputField"></div>
+        </div>
+    
+    `;
+    
+    document.write(content);
+}
+
+
+//controller
+
+function convertToMorse(input) {
+    let inputValue = input.value;
+    let inputLength = input.length;
+}
+
+</script>
+</body></html>
