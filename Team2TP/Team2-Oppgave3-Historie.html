@@ -84,6 +84,8 @@ button {
     var tempPiece;
     var trueGate;
 
+    var ting;
+
     //View
     updateVeiw();
     function updateVeiw() {
@@ -189,10 +191,6 @@ button {
 
     function checkSentence(selectedSentence) {
 
-        // document.getElementById('output').innerHTML = textSelected;
-        // textSelected.search(".")
-
-
         if(textSelected === text1Solution) text1 = "Green";
         if(textSelected === text2Solution) text2 = "Green";
         if(textSelected === text3Solution) text3 = "Green";
@@ -202,6 +200,7 @@ button {
 
     function radio(input) {
 
+        ting = input;
         if(textSelected != "") {
             textSelected = [];
         }
@@ -216,5 +215,5 @@ button {
         
     return (textSelected = textSelected.replace(/,/g, " ")); 
     }
-</script>
-</body></html>
+    
+</script></body></html>

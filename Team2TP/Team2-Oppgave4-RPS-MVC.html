@@ -1,23 +1,57 @@
-<html>
-    
-<head>
-<style>
+<html><head><style>
+
     html, body {
+
         margin: 0;
         padding: 0;
         background-color: #5D5C61;
     }
 
     #content { 
-        height: 85vh;
+
+        height: 100vh;
         display: flex;
         flex-direction: column;  
     }
 
+    #headerAligner {
+        display: flex;
+        margin-left: 2%;
+        margin-right: 2%;
+        text-align: center;
+    }
+
+    #headerStatAligner {
+        display: flex;
+        margin-left: 2%;
+        margin-right: 2%;
+        text-align: center;
+    }
+
+    #headerAligner :nth-child(1) { flex-grow: 2;}
+    #headerAligner :nth-child(2) { flex-grow: 12;}
+    #headerAligner :nth-child(3) { flex-grow: 2;}
+
+    #headerStatAligner :nth-child(1) { flex-grow: 2;}
+    #headerStatAligner :nth-child(2) { flex-grow: 8;}
+    #headerStatAligner :nth-child(3) { flex-grow: 2;}
+
+
     #superAligner {
+        height: 85vh;
+        margin-left: 2%;
+        margin-right: 2%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center; 
+    }
+
+
+
+    #superColumn {
+        display: flex;
+        flex-direction: column;
     }
 
     #player, #computer {
@@ -27,6 +61,12 @@
  
     #computer {
         transform: scaleX(-1);
+    }
+
+    button {  
+        align-self: flex-end;
+        width: 100%;
+        height: 6%;
     }
 
     img {
@@ -40,8 +80,8 @@
     }
 
     
-    .container:hover .text {
-    opacity: 0.5;
+    .container:hover .text { 
+        opacity: 0.5;
     }
 
     .container:hover  {
@@ -51,43 +91,38 @@
     p {
         padding: 0;
         margin: 0;
-        align-self: center;
-        font-size: 5em;
+        font-size: 4.5em;
     }
 
     .text {
-    color: white;
-    opacity: 0;
-    transition: .5s ease;
-    font-size: 50px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
+        color: white;
+        opacity: 0;
+        transition: .5s ease;
+        font-size: 50px;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
     }
 
     .text:hover {
         opacity: 0;
     }
 
-</style>
-</head>
-
-<body>
-<div id="content"></div>
-
-</body>
-
-<script>
+</style></head><body><div id="content"></div></body><script>
 
 //model
 var content = document.getElementById('content');
-var playerCss;
-var computerCss; 
 
+var playerCss;
+var computerCss;
+
+let gameScoreCounterPlayer = 0;
+let gameScoreCounterDraw = 0;
+let gameScoreCounterComputer = 0;
 
 // CSS variabler for view oppdatert fra kontroller til player og computer
 let computerPickedRock;
@@ -107,19 +142,25 @@ let playerPicked;
 let gameStatus = true;
 let gameMessage = '';
 
-
 //view 
 view();
 function view() {
 
     let gameStatusMessage = gameStatus === true ? 'Pick an object' : gameMessage; // Game Won || Game Lost || Draw
     
-
     content.innerHTML = `
-        <p>${(gameStatusMessage)}</p>
 
+    <div id="headerAligner">
+        <p>You</p>
+        <p>Draw</p>
+        <p>Bot</p>
+    </div>
+    <div id="headerStatAligner">
+        <p>${gameScoreCounterPlayer}</p>
+        <p>${gameScoreCounterDraw}</p>
+        <p>${gameScoreCounterComputer}</p>
+    </div>
         <div id="superAligner">
-
             <div id="player">
                 <div class="container" style="background-color: ${playerPickedRock}">
                     <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
@@ -137,6 +178,10 @@ function view() {
                 </div>
             </div>
             
+            <div id="superColumn">
+                <p>${(gameStatusMessage)}</p> 
+            </div>
+
             <div id="computer">
                 <div class="container" style="background-color: ${computerPickedRock}">
                     <!-- <div class="text">Will you choose :<br> The Rock?</div> -->
@@ -153,8 +198,8 @@ function view() {
                     <img src="scissors.png"> 
                 </div>
             </div>
-
         </div>
+        <button onclick="resetGame()">Reset Game</button>
     `;
 }
 
@@ -175,7 +220,7 @@ function playerSelect(playerSelected) {
     else if (playerPicked === 'paper') playerPickedPaper = 'white';
     else playerPickedScissors = 'red';
 
-computerSelect();
+    computerSelect();
 }
 
 
@@ -188,22 +233,36 @@ function computerSelect() {
     else if (computer == 2) { computerPicked = "paper"; computerPickedPaper = 'white';}
     else { computerPicked = "scissors"; computerPickedScissors = 'red';}
       
-comparePlayerValues();
+    comparePlayerValues();
 } 
 
 function comparePlayerValues() {
 
-    if (playerPicked == computerPicked) gameMessage = "Uavgjort";
+    if (playerPicked == computerPicked) { gameMessage = "Uavgjort"; gameScoreCounterDraw++; }
     if (playerPicked !== computerPicked) {
         
-        if((playerPicked === "scissors") && (computerPicked === "paper")) gameMessage = "Du vant";
-        else if((playerPicked === "rock") && (computerPicked === "scissors")) gameMessage = "Du vant"; 
-        else if((playerPicked === "paper") && (computerPicked === "rock")) gameMessage = "Du vant";
-        else gameMessage = "Du tapte";
+        if((playerPicked === "scissors") && (computerPicked === "paper")) { gameMessage = "Du vant"; gameScoreCounterPlayer++; }
+        else if((playerPicked === "rock") && (computerPicked === "scissors")) { gameMessage = "Du vant"; gameScoreCounterPlayer++; } 
+        else if((playerPicked === "paper") && (computerPicked === "rock"))  { gameMessage = "Du vant"; gameScoreCounterPlayer++; }
+        else  {  { gameMessage = "Du tapte"; gameScoreCounterComputer++; } }
     }
     gameStatus = false;
 
-view();
+    view();
+}
+
+function resetGame() {
+
+    computerPickedRock = computerPickedPaper = computerPickedScissors = ''; 
+    playerPickedRock = playerPickedPaper = playerPickedScissors = '';
+
+    gameStatus = true;
+
+    gameScoreCounterPlayer = 0;
+    gameScoreCounterDraw = 0;
+    gameScoreCounterComputer = 0;
+
+    view();
 }
 
 </script></html>
