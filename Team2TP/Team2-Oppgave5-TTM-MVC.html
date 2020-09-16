@@ -26,6 +26,19 @@
             position: absolute;
             height: 60vh;
             width: 60vw;
+            display: flex;
+        }
+
+        #inputField, #outputField {
+            
+            resize: none;
+            border: none;
+            height: 93px;
+            width: 300px;
+        }
+
+        #outputField {
+            align-self: flex-end;
         }
 
         
@@ -40,6 +53,58 @@
 
 //model
 
+let globalInput;
+let globaloutput;
+let globalInputCharAt;
+
+let globalMorse;
+let text;
+
+
+// gjøre om til et array med objekter
+const globalMorseTextObject = {
+    a: ".-",
+    b: "-...",
+    c: "-.-.",
+    d: "-..",
+    e: ".",
+    f: "..-.",
+    g: "--.",
+    h: "....",
+    i: "..",
+    j: ".---",
+    k: "-.-",
+    l: ".-..",
+    m: "--",
+    n: "-.",
+    o: "---",
+    p: ".--.",
+    q: "--.-",
+    r: ".-.",
+    s: "...",
+    t: "-",
+    u: "..-",
+    v: "...-",
+    w: ".--",
+    x: "-..-",
+    y: "-.--",
+    z: "--..",
+    æ: "·−·−",
+    ø: "−−−·",
+    å: "·−−·−",
+    1: ".----",
+    2: "..---",
+    3: "...--",
+    4: "....-",
+    5: ".....",
+    6: "-....",
+    7: "--...",
+    8: "---..",
+    9: "----.",
+    0: "-----",
+    space: " "
+}
+
 //veiw
 
 show();
@@ -51,8 +116,8 @@ function show() {
         <div id="backgroundTwo"></div>
 
         <div id="app">
-            <input id="inputField" oninput="convertToMorse(this) || ''">
-            <div id="outputField"></div>
+            <textarea maxlength="174" id="inputField" oninput="convertToMorse(this)"></textarea>
+            <textarea maxlength="174" id="outputField" oninput="convertToText(this)"></textarea>
         </div>
     
     `;
@@ -63,10 +128,78 @@ function show() {
 
 //controller
 
+// globalMorseTextObject[]
+// let thisX = input.value[i];
+// globalInput.charAt(i);
+
 function convertToMorse(input) {
-    let inputValue = input.value;
-    let inputLength = input.length;
+
+    document.getElementById('outputField').value = "";
+    
+    globalInput = input.value;
+    globalInput = globalInput.toString();
+    globalInput = globalInput.toLowerCase();
+
+    for(let i = 0; i < input.value.length; i++) {
+        let charAt = globalInput[i];
+
+        // hjelpevariabel for å feilsøke i charAt
+        globalInputCharAt = charAt;
+        
+        if(charAt === " ") charAt = "space";
+        document.getElementById('outputField').value += globalMorseTextObject[charAt];
+
+        
+            
+
+
+        
+    }
+
 }
+
+// key: value;
+//   a:  ".-"
+
+
+function dummyFunction() {
+
+    if(charAt === "." || charAT === "-") {
+    globalMorse = input.value.split(" ")
+
+        for(let i = 0; i > globalMorse.length; i++) {
+            
+            for(let j = 0; j > globalMorseTextObject.length; j++) {
+                if(globalMorseTextObject == globalMorse[i]) {var x = 0}
+            }
+            
+        text += 0; 
+        }
+    }
+}
+
+// function convertToText(input) {
+
+//     document.getElementById('inputField').value = "";
+    
+//     globalInput = input.value;
+
+
+//     globaloutput = globalInput.toString();
+//     globalInput = globalInput.toLowerCase();
+
+
+//     for(let i = 0; i < input.value.length; i++) {
+//         let charAt = globalInput[i];
+        
+//         if(charAt === " ") charAt = "space";
+//         document.getElementById('inputField').value += globalMorseTextObject[charAt];
+//     }
+
+
+// }
+
+
 
 </script>
 </body></html>
