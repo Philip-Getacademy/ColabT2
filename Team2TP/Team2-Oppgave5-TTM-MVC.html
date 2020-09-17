@@ -1,7 +1,7 @@
-<html><head>
-
-    <style>
-        body { margin: 0;
+<html><head><style>
+       
+        body { 
+            margin: 0;
         }
 
         #backgroundOne {
@@ -29,7 +29,7 @@
             display: flex;
         }
 
-        #inputField, #outputField {
+        #textField, #morseField {
             
             resize: none;
             border: none;
@@ -37,31 +37,18 @@
             width: 300px;
         }
 
-        #outputField {
+        #morseField {
             align-self: flex-end;
         }
 
         
 
-    </style>
-    <script></script>
-
-</head><body>
-
-
-<script>
+</style></head><body><script>
 
 //model
 
-let globalInput;
-let globaloutput;
-let globalInputCharAt;
 
-let globalMorse;
-let text;
-
-
-// gjøre om til et array med objekter
+let reverseGlobalMorseTextObject = {};
 const globalMorseTextObject = {
     a: ".-",
     b: "-...",
@@ -111,93 +98,79 @@ show();
 function show() {
 
     let content = `
-    
         <div id="backgroundOne"></div>
         <div id="backgroundTwo"></div>
 
         <div id="app">
-            <textarea maxlength="174" id="inputField" oninput="convertToMorse(this)"></textarea>
-            <textarea maxlength="174" id="outputField" oninput="convertToText(this)"></textarea>
+            <textarea maxlength="174" id="textField" placeholder="Please Insert Text..." oninput="convertToMorse(this.value)"></textarea>
+            <textarea maxlength="174" id="morseField" placeholder="Please Insert Morse..." oninput="convertToText(this.value)"></textarea>
         </div>
-    
     `;
-    
-    document.write(content);
+
+    document.body.innerHTML = content;
 }
 
 
 //controller
 
-// globalMorseTextObject[]
-// let thisX = input.value[i];
-// globalInput.charAt(i);
+function convertToMorse(textField) {
 
-function convertToMorse(input) {
-
-    document.getElementById('outputField').value = "";
+    // Blanker det andre feltet slik at det er klart for input
+    document.getElementById('morseField').value = "";
     
-    globalInput = input.value;
-    globalInput = globalInput.toString();
-    globalInput = globalInput.toLowerCase();
+    globalTextInput = textField.toString().toLowerCase();
 
-    for(let i = 0; i < input.value.length; i++) {
-        let charAt = globalInput[i];
 
-        // hjelpevariabel for å feilsøke i charAt
-        globalInputCharAt = charAt;
+    for(let i = 0; i < textField.length; i++) {
+        let charAt = globalTextInput[i];
         
         if(charAt === " ") charAt = "space";
-        document.getElementById('outputField').value += globalMorseTextObject[charAt];
 
-        
-            
+        document.getElementById('morseField').value += globalMorseTextObject[charAt];
 
-
-        
+        if(i < textField.length - 1) document.getElementById('morseField').value += " ";
     }
-
 }
 
-// key: value;
-//   a:  ".-"
+
+function convertToText(morseField) {
+
+    // Blanker det andre feltet slik at det er klart for input
+    document.getElementById('textField').value = "";
 
 
-function dummyFunction() {
+    if(morseField.charAt(0) === "." || morseField.charAt(0) === "-") {
+        
+        globalMorse = morseField.split(" ");
 
-    if(charAt === "." || charAT === "-") {
-    globalMorse = input.value.split(" ")
-
-        for(let i = 0; i > globalMorse.length; i++) {
+        reverseGlobalMorseTextObject = (
             
-            for(let j = 0; j > globalMorseTextObject.length; j++) {
-                if(globalMorseTextObject == globalMorse[i]) {var x = 0}
+            Object.keys(globalMorseTextObject).reduce(
+                function(newObject, fieldName) {
+                    const value = globalMorseTextObject[fieldName];
+                    newObject[value] = fieldName;
+                    return newObject;
+
+                },{}
+            ) 
+        )
+
+        for(let i = 0; i <= globalMorse.length-1; i++) {
+            let morseAt = globalMorse[i];
+
+            if (morseAt === "" || morseAt == " ") { 
+                document.getElementById('textField').value += " "; 
+                reverseGlobalMorseTextObject[morseAt] = ""; 
             }
-            
-        text += 0; 
+
+            document.getElementById('textField').value += reverseGlobalMorseTextObject[morseAt];
         }
     }
-}
-
-// function convertToText(input) {
-
-//     document.getElementById('inputField').value = "";
     
-//     globalInput = input.value;
-
-
-//     globaloutput = globalInput.toString();
-//     globalInput = globalInput.toLowerCase();
-
-
-//     for(let i = 0; i < input.value.length; i++) {
-//         let charAt = globalInput[i];
-        
-//         if(charAt === " ") charAt = "space";
-//         document.getElementById('inputField').value += globalMorseTextObject[charAt];
-//     }
-
-
-// }
+    else {
+        document.getElementById('textField').value = "Please enter valid morsecode";
+    }         
+}
 
 
 
