@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: cadetblue;
+        }
+        button {
+            padding: 15px 32px;
+            cursor: pointer;
+        }
+        #app {
+            height: 100vh;
+            width: 100vw;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        
+        
+        //model
+        shortApp = document.getElementById('app');
+
+        let disableAction = "";
+
+        // PLAYER DEFENSIVES
+        let playerHealth = 300;
+        let playerDodgeChance = 40;
+        let playerLifeSteal = 20;
+
+        // PLAYER OFFENSIVES
+        let playerDamageModifier = 1;
+        let playerDamage = 50;
+        let playerCritChance = 100;
+
+        // MONSTER DEFENSIVES
+        let monsterHealth = 2000;
+
+        // MONSTER OFFENSIVES
+        let monsterDamageModifier = 1;
+        let monsterDamage = 70;
+        
+
+        // TROUBLESHOOTINGVAR
+        let plDmg;
+
+
+
+        //veiw
+        oppdaterKamp();
+        function oppdaterKamp() {
+
+            if(monsterHealth == 0 || playerHealth == 0) disableAction = "disabled";
+
+            let drawView = `
+            
+                <p>Player Health: ${playerHealth}</p>
+                <p>Monster Health: ${monsterHealth}</p>
+                <button ${disableAction} onclick="playerAttack()">Attack</button>
+            
+            `;
+
+            shortApp.innerHTML = drawView;
+        }
+        
+        //controller
+        function playerAttack() {
+
+            let randomNumber = Math.floor((Math.random() * 100) + 1);
+            let currentPlayerDamage = playerDamage;
+           
+            if (randomNumber > 100 - playerCritChance) currentPlayerDamage = currentPlayerDamage * 2;
+
+            // TROUBLESHOOTINGVAR
+            plDmg = currentPlayerDamage;
+
+
+            monsterHealth -= currentPlayerDamage * playerDamageModifier;
+            playerHealth += (currentPlayerDamage / 100) * playerLifeSteal;
+
+            if(monsterHealth < 0) {
+                monsterHealth = 0; 
+                disableAction = "disabled";
+            }   
+         
+            monsterAttack();
+        }
+
+        function monsterAttack() {
+
+            
+            let randomNumber = Math.floor((Math.random() * 100) + 1);
+            let currentMonsterDamage = monsterDamage;
+
+            if (randomNumber > 100 - playerDodgeChance) currentMonsterDamage -= currentMonsterDamage;
+
+            playerHealth -= currentMonsterDamage;
+            
+
+            if(playerHealth < 0) {
+                playerHealth = 0;
+                disableAction = "disabled";
+            }
+            
+
+            oppdaterKamp();
+        }
+
+    </script>
+</body>
+</html>
+
+<!--
+- Begge skal ha Healthpoints, som skal minske når de angripes - skal synes på skjermen
+- Player mindre HP og angrepskraft enn NPC - vanskligere å vinne
+- Player skal ha mulighet for crit/dobbel angrepskraft
+- NPC skal kunne bomme på player og gjøre 0 skade
+
+- Ikke være mulig å angripe etter 0 i HP (begge)
+- Ikke være mulig å gå under 0 i HP
+ & Vinnerbeskjed på skjermen!:D
+-->
