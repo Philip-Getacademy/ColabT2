@@ -1,94 +1,93 @@
-<html><head><style>
+<html><head>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap" rel="stylesheet">
+    
+<style>
        
-        body { 
-            margin: 0;
-        }
+    body { 
+        margin: 0;
+    }
 
-        #backgroundOne {
-            position: absolute;
-            border-left: 50vw solid rgba(240, 141, 48, 0.9);
-            border-right: 50vw solid transparent;
-            border-bottom: 50vh solid transparent;
-            border-top: 50vh solid rgba(240, 141, 48, 0.9);
-        }
+    #backgroundOne {
+        position: absolute;
+        border-left: 50vw solid rgba(240, 141, 48, 0.9);
+        border-right: 50vw solid transparent;
+        border-bottom: 50vh solid transparent;
+        border-top: 50vh solid rgba(240, 141, 48, 0.9);
+    }
 
-        #backgroundTwo {
-            position: absolute;
-            border-left: 50vw solid transparent;
-            border-right: 50vw solid rgba(34, 197, 34, 0.9);
-            border-bottom: 50vh solid rgba(34, 197, 34, 0.9);
-            border-top: 50vh solid transparent;
-        }
+    #backgroundTwo {
+        position: absolute;
+        border-left: 50vw solid transparent;
+        border-right: 50vw solid rgba(34, 197, 34, 0.9);
+        border-bottom: 50vh solid rgba(34, 197, 34, 0.9);
+        border-top: 50vh solid transparent;
+    }
 
-        #app {
-            margin-top: 20vh;
-            margin-left: 20vw;
-            position: absolute;
-            height: 60vh;
-            width: 60vw;
-            display: flex;
-        }
+    #app {
+        margin-top: 15vh;
+        margin-left: 10vw;
+        position: absolute;
+        height: 75vh;
+        width: 75vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        #textField, #morseField {
-            
-            resize: none;
-            border: none;
-            height: 93px;
-            width: 300px;
-        }
-
-        #morseField {
-            align-self: flex-end;
-        }
-
+    #textField, #morseField {
         
+        resize: none;
+        border: none;
+        height: 93px;
+        width: 300px;
+    }
+
+    h1, h2 {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inconsolata', monospace;
+    }
+
+    #text {
+        margin-top: 15vh;
+        margin-left: 10vw;
+        position: absolute;
+        height: 75vh;
+        width: 75vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    #heading {
+        transform: translateY(-100%);
+        align-self: flex-start;
+        position: absolute;
+    }
+
+
+    #morseToTextDesciption {
+        margin-bottom: -5%;
+        align-self: flex-end;
+    }
 
 </style></head><body><script>
 
 //model
 
-
 let reverseGlobalMorseTextObject = {};
 const globalMorseTextObject = {
-    a: ".-",
-    b: "-...",
-    c: "-.-.",
-    d: "-..",
-    e: ".",
-    f: "..-.",
-    g: "--.",
-    h: "....",
-    i: "..",
-    j: ".---",
-    k: "-.-",
-    l: ".-..",
-    m: "--",
-    n: "-.",
-    o: "---",
-    p: ".--.",
-    q: "--.-",
-    r: ".-.",
-    s: "...",
-    t: "-",
-    u: "..-",
-    v: "...-",
-    w: ".--",
-    x: "-..-",
-    y: "-.--",
-    z: "--..",
-    æ: "·−·−",
-    ø: "−−−·",
-    å: "·−−·−",
-    1: ".----",
-    2: "..---",
-    3: "...--",
-    4: "....-",
-    5: ".....",
-    6: "-....",
-    7: "--...",
-    8: "---..",
-    9: "----.",
-    0: "-----",
+    a: ".-", b: "-...", c: "-.-.", d: "-..", e: ".", 
+    f: "..-.", g: "--.", h: "....", i: "..", j: ".---",
+    k: "-.-", l: ".-..", m: "--", n: "-.", o: "---",
+    p: ".--.", q: "--.-", r: ".-.", s: "...", t: "-",
+    u: "..-", v: "...-", w: ".--", x: "-..-", y: "-.--",
+    z: "--..", æ: "·−·−", ø: "−−−·", å: "·−−·−",
+    0: "-----", 1: ".----", 2: "..---", 3: "...--", 
+    4: "....-", 5: ".....", 6: "-....", 7: "--...", 
+    8: "---..", 9: "----.", 
     space: " "
 }
 
@@ -98,12 +97,28 @@ show();
 function show() {
 
     let content = `
+        
         <div id="backgroundOne"></div>
         <div id="backgroundTwo"></div>
-
         <div id="app">
             <textarea maxlength="174" id="textField" placeholder="Please Insert Text..." oninput="convertToMorse(this.value)"></textarea>
             <textarea maxlength="174" id="morseField" placeholder="Please Insert Morse..." oninput="convertToText(this.value)"></textarea>
+        </div>
+
+        <div id="text">
+            <h1 id="heading">Morse and Text Converter</h1>
+            <h2 id="morseToTextDesciption">
+      
+            <pre>
+a: .-    f: ..-. k: -.-  p: .--. u: ..-  z: --..
+b: -...  g: --.  l: .-.. q: --.- v: ...- æ: ·−·− 
+c: -.-.  h: .... m: --   r: .-.  w: .--  ø: −−−· 
+d: -..   i: ..   n: -.   s: ...  x: -..- å: ·−−·−
+e: .     j: .--- o: ---  t: -    y: -.--
+
+0: ----- 1: .---- 2: ..--- 3: ...-- 4: ....- 
+5: ..... 6: -.... 7: --... 8: ---.. 9: ----.
+            </pre>
         </div>
     `;
 
@@ -152,7 +167,7 @@ function convertToText(morseField) {
                     return newObject;
 
                 },{}
-            ) 
+            )
         )
 
         for(let i = 0; i <= globalMorse.length-1; i++) {

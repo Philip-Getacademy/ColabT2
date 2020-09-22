@@ -1,0 +1,100 @@
+<html>
+
+<head>
+
+    <style>
+
+        button {
+
+            height: 20px;
+            width: 50px;
+
+        }
+
+
+
+    </style>
+
+</head>
+
+<body>
+    
+
+    <div id="app"></div>
+    
+    <script>
+
+    // hjelpevariabel for APP
+    let content = document.getElementById('app');
+    let addContent = "";
+
+        
+
+    //model
+
+    let x = 1;
+    let y;
+    let amount;
+    let stuff;
+
+    let changeButtonText1 = 'knapp';
+    let changeButtonText2 = 'knapp';
+    let changeButtonText3 = 'knapp';
+    let changeButtonText4 = 'knapp';
+
+    let whatButton;
+
+    //view
+    drawModel();
+    function drawModel() {
+        let drawApp = `
+
+            <p> ${x} </p>
+            <p> ${y} </p>
+            <p> ${amount} </p>
+            <p> ${stuff} </p>
+            <p> ${whatButton} </p>
+
+            <button onclick="changeModel(${x})">${changeButtonText1}</button>
+            <button onclick="changeModel(this)">${changeButtonText2}</button>
+            <button onclick="changeModel(${y})">${changeButtonText3}</button>
+            <button onclick="changeModel(${amount})">${changeButtonText4}</button>
+            <button onclick="changeModel(${stuff})">${changeButtonText4}</button>
+        
+        
+        `;
+
+        content.innerHTML = drawApp + addContent;
+    }
+
+
+    //controller
+
+    function changeModel(onclickButton) {
+
+        let z = 5;
+
+        whatButton = onclickButton;
+
+        if (onclickButton) changeButtonText2 = "This";
+        
+        if(onclickButton.innerHTML === "This") x = z * x;
+        if(onclickButton.innerHTML === "knapp") y += x * x;
+
+        if(onclickButton == 1) addContent += `<div style="height: 20px; width: 20px; background-color: black;"></div>`;
+        if(onclickButton == 5) amount = y + x + z;
+        if(onclickButton == 11) stuff = y + x + z + amount;
+        if(onclickButton > 22) addContent += `<div style="height: 20px; width: 20px; background-color: blue;"></div>`;
+        
+        
+
+
+        drawModel();
+    }
+
+
+    </script>
+</body>
+
+
+</html>
