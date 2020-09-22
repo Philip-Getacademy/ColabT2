@@ -100,11 +100,6 @@ function show() {
         
         <div id="backgroundOne"></div>
         <div id="backgroundTwo"></div>
-        <div id="app">
-            <textarea maxlength="174" id="textField" placeholder="Please Insert Text..." oninput="convertToMorse(this.value)"></textarea>
-            <textarea maxlength="174" id="morseField" placeholder="Please Insert Morse..." oninput="convertToText(this.value)"></textarea>
-        </div>
-
         <div id="text">
             <h1 id="heading">Morse and Text Converter</h1>
             <h2 id="morseToTextDesciption">
@@ -120,6 +115,12 @@ e: .     j: .--- o: ---  t: -    y: -.--
 5: ..... 6: -.... 7: --... 8: ---.. 9: ----.
             </pre>
         </div>
+        <div id="app">
+            <textarea maxlength="174" id="textField" placeholder="Please Insert Text..." oninput="convertToMorse(this.value)"></textarea>
+            <textarea maxlength="174" id="morseField" placeholder="Please Insert Morse..." oninput="convertToText(this.value)"></textarea>
+        </div>
+
+
     `;
 
     document.body.innerHTML = content;
