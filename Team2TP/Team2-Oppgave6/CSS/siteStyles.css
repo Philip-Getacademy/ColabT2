@@ -1,0 +1,91 @@
+
+button {
+
+    padding: 15px 32px;
+    cursor: pointer;
+    border: none;
+    background-image: linear-gradient(
+        120deg, 
+        var(--goldLight),
+        yellow,  
+        var(--goldHeavy)
+    );
+
+}
+
+#gameHeadingH1 {
+
+    background-image: linear-gradient(
+        120deg, 
+        var(--goldLight),
+        yellow,  
+        var(--goldHeavy)
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    
+}
+
+#app {
+
+    height: 90vh;
+    width: 90vw;
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.preGame {
+
+    height: 40vh;
+    width: 60vw;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#trapez {
+    
+    position: absolute;
+    height: 50vh;
+    width: 25vw;
+    z-index: -100;
+    margin-top: -50vh;
+	border: 250px solid rgba(0,0,0,0);
+
+    border-top: 0px;
+	border-bottom: 600px solid #1abc9c;
+   	border-bottom-color: cadetblue;
+	border-bottom-style: solid;
+	border-bottom-width: 150px;
+
+}
+
+
+#enterName {
+
+    resize: none;
+    border: none;
+
+    margin-bottom: 5%;
+    padding-top: 5%; 
+
+    height: 10%;
+    width: 50%;
+
+    text-align: center;
+}
+
+button {
+
+    padding: 0.5%;
+}
