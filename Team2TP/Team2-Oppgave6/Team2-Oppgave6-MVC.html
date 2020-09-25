@@ -25,7 +25,7 @@
     let gameInit = "Slay";
 
 // intro view
-drawIntro();
+// drawIntro();
 function drawIntro() {
     let introScreen = `
 
@@ -34,7 +34,7 @@ function drawIntro() {
             <h1 style="margin-bottom: 10%;">${gameName}</h1>
         </div>
         <div id="trapez"></div>
-        <button onclick ="drawSettings()" style="height: 25%; width: 100%;">${gameInit}</button>
+        <button onclick ="drawSettings()">Play</button>
     </div>
 
     `;
@@ -45,7 +45,7 @@ shortApp.innerHTML = introScreen;
 function drawSettings() {
 
     let settingsScreen = `
-        <div class="preGame" id="preGame" style="height: 20vh; justify-content: space-evenly;">
+        <div class="preGame" id="preGame" style="justify-content: space-between;">
             <div id="gameHeadingH1">
                 <h1 style="margin-bottom: 10%;">${gameName}</h1>
             </div>
@@ -60,8 +60,7 @@ function drawSettings() {
                     <span class="checkmark"></span>
                 </label>
             </div>
-            <div id="square"></div>
-            <button onclick="drawPlayerOverview()" style="height: 25%; width: 52%; padding: 1%;">Confirm</button>
+            <button onclick="drawTown()" style="width: 50%; height: 10%; border-radius: 2px;">Confirm</button>
         </div>
         
     `;
@@ -69,37 +68,179 @@ function drawSettings() {
 shortApp.innerHTML = settingsScreen;
 }
 
-// drawPlayerOverview();
-function drawPlayerOverview() {
+// drawTown();
+function drawTown() {
+
+
+
+    currentPlayerHealth = playerHealth;
+
+    talents = talents == mageTalents ? mageTalents : warriorTalents;
+
+    let talentOneDescription = talents == mageTalents ? "Fireball" : "Swing";
+    let talentTwoDescription = talents == mageTalents ? "Scortch" : "Rend";
+    let talentThreeDescription = talents == mageTalents ? "Pyroignition" : "Execute";
+    
+    let talentOne = talents == mageTalents ? mageAttack : warriorAttack;
+    let talentTwo = talents == mageTalents ? mageBleed : warriorBleed;
+    let talentThree = talents == mageTalents ? mageExecute : warriorExecute;
+    
     let playerOverviewScreen = `
-            <img>
-            <h5>${playerName}</h5>
-            <button onclick="showThis(this)" value="false">stats</button>
-            <div id="stats" style="display: none">${stats}</div>
-            <button onclick="showThis(this)" value="false">talents</button>
-            <div id="talents" style="display: none">${talents}</div>
-            <button onclick="combatStatus()"></button>
+    <h5>${playerName}</h5>
+    <h6>${playerClass}</h6>
+        <div id="playerOverview">  
+            <div id="statsContainer">
+                <button onclick="showThis(this)" value="false">stats</button>
+                <div id="stats" style="display: none">
+                    <div>Agility ${agility} <button onclick="increaseStats()">${statsAvailable}</button></div>
+                    <div>Strength ${strength} <button onclick="increaseStats()">${statsAvailable}</button></div>
+                    <div>Intelligence ${intelligence} <button onclick="increaseStats()">${statsAvailable}</button></div>
+                </div>
+            </div>
+            <div id="talentsContainer">
+                <button onclick="showThis(this)" value="false">talents</button>
+                <div id="talents" style="display: none">
+                    <div>${talentOneDescription} ${talentOne} <button onclick="increaseStats()">${talentsAvailable}</button></div>
+                    <div>${talentTwoDescription} ${talentTwo} <button onclick="increaseStats()">${talentsAvailable}</button></div>
+                    <div>${talentThreeDescription} ${talentThree} <button onclick="increaseStats()">${talentsAvailable}</button></div>
+                </div>
+            </div>
+            
+            <button id="nextGame" onclick="choseMap()">${gameInit}</button>
+        </div>
+        <div id="square"></div>
     `;
+
 shortApp.innerHTML = playerOverviewScreen;
 }
 
+//choseMap();
+function choseMap() {
+
+    // mock model
+    playerName = "Fritjof";
+    playerClass = "Warrior";
+
+    currentMonsterHealth = monsterHealth;
+
+    
+    let disableAction = chosenMap == "castle" || chosenMap == "cove" ? "" : "disabled";
+
+    let choseMapScreen = `
+        <div id="playerInfo">   
+                <h5>${playerName}</h5><h6>${playerClass}</h6><h6>Level : ${playerLevel}</h6><h6>${currentPlayerExp} / ${requiredPlayerExp}</h6>
+        </div>
+        <div id="chooseMap">
+            <div id="mapOverview">
+                <div id="map1" onclick="chosenMap = 'castle', choseMap()"><sup>Castle</sup></div>
+                <div id="map2" onclick="chosenMap = 'cove', choseMap()"><sup>Cove</sup></div>
+            </div>
+            <button ${disableAction} id="nextGame" onclick="combatStatus(chosenMap)">${gameInit}</button>
+        </div>
+    `;
+
+    shortApp.innerHTML = choseMapScreen;
+}
 
 
 //veiw
-// combatStatus();
-function combatStatus() {
+combatStatus();
+function combatStatus(chosenMap) {
 
-    let disableAction = monsterHealth <= 0 || playerHealth <= 0 ? "disabled" : "";
-
-    let drawView = `
     
-        <p>Player Health: ${playerHealth}</p>
-        <p>Monster Health: ${monsterHealth}</p>
-        <button ${disableAction} onclick="playerAttack()">Attack</button>
+    // mock model
+    chosenMap = "castle";
+    playerName = "Fritjof";
+    playerClass = "Warrior";
+    
+    currentstats = warr
+    
+    let disableAction = monsterHealth <= 0 || playerHealth <= 0 ? "disabled" : "";
+    let enableAction = monsterHealth <=0 || playerHealth <= 0 ? "" : "disabled";
 
+    // let timeOut = timeOut(function(){}, 3000);
+    
+    
+    if (chosenMap === "castle") {
+        let drawView = `
+        <div id="playerInfo">   
+                    <h5>${playerName}</h5><h6>${playerClass}</h6><h6>Level : ${playerLevel}</h6><h6>${currentPlayerExp} / ${requiredPlayerExp}</h6>
+            </div>
+            <!-- cove and caste = row -->
+            <div id="castle">          
+                <div id="player">
+                    <img id="${playerClass}">
+                    <div>${currentStats}</div>     
+                </div>
+
+                <div id="action">
+                    <p>Player Health: ${playerHealth}</p>
+                    <p>Monster Health: ${monsterHealth}</p>
+                    <button ${disableAction} onclick="playerAttack()">Attack</button>
+                    <button ${enableAction} onclick="combatStats()">Show stats...</button>
+                </div>
+                
+                <div id="computer">
+                
+                
+                
+                
+ 
+                </div>
+            </div>   
+        `;
+
+        shortApp.innerHTML = drawView;
+    }
+
+    else if (chosenMap === "cove") {
+        let drawView = `
+            <div id="playerInfo">   
+                    <h5>${playerName}</h5><h6>${playerClass}</h6><h6>Level : ${playerLevel}</h6><h6>${currentPlayerExp} / ${requiredPlayerExp}</h6>
+            </div>
+            <!-- cove and caste = row -->
+            <div id="cove">          
+                <div id="player">
+                    <img id="${playerClass}">
+                    <div>${currentStats}</div>
+                </div>
+
+                <div id="action">
+                    <p>Player Health: ${playerHealth}</p>
+                    <p>Monster Health: ${monsterHealth}</p>
+                    <button ${disableAction} onclick="playerAttack()">Attack</button>
+                    <button ${enableAction} onclick="combatStats()">Show stats...</button>
+                </div>
+                
+                <div id="computer">
+                
+                
+                
+                
+ 
+                </div>
+            </div>      
+        `;
+
+        shortApp.innerHTML = drawView;
+    }
+
+    else return choseMap(); 
+}
+
+function combatStats() {
+
+
+    let enableAction = monsterHealth <=0 || playerHealth <= 0 ? "" : "disabled";
+
+    let drawCombatStatus = `
+    
+    <button ${enableAction} onclick="drawTown()">Back to Town</button>
+    
     `;
+    shortApp.innerHTML = drawCombatStatus;
+    
 
-    shortApp.innerHTML = drawView;
 }
 
 

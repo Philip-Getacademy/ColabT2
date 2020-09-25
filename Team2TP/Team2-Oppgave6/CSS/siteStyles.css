@@ -4,6 +4,8 @@ button {
     padding: 15px 32px;
     cursor: pointer;
     border: none;
+    border-radius: 3px;
+    box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.12);
     background-image: linear-gradient(
         120deg, 
         var(--goldLight),
@@ -21,12 +23,13 @@ button {
         yellow,  
         var(--goldHeavy)
     );
-
     background-clip: text;
+    text-shadow: 3px 4px 3px rgba(0, 0, 0, 0.12);;
     -webkit-background-clip: text;
     color: transparent;
     
 }
+
 
 #app {
 
@@ -43,8 +46,8 @@ button {
 
 .preGame {
 
-    height: 40vh;
-    width: 60vw;
+    height: 30vh;
+    width: 50vw;
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -61,7 +64,7 @@ button {
     z-index: -100;
     margin-top: -50vh;
 	border: 250px solid rgba(0,0,0,0);
-
+    border-radius: 3px;
     border-top: 0px;
 	border-bottom: 600px solid #1abc9c;
    	border-bottom-color: cadetblue;
@@ -69,23 +72,190 @@ button {
 	border-bottom-width: 150px;
 
 }
+#square {
+    
+    position: absolute;
+    height: 60vh;
+    width: 80vw;
+    z-index: 10;
+    background-color:  cadetblue;
 
+}
+
+#statsContainer, #talentsContainer {
+    z-index: 1000;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#statsContainer > button, #talentsContainer > button {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 50px;
+    width: 50%;
+}
+
+#app > h5 {
+    color: white;
+    font-size: 3em;
+}
+#app > h6 {
+    z-index: 10000;
+    color: black;
+    font-size: 3em;
+}
+
+
+
+
+
+#stats, #talents {
+    z-index: 1000;
+    border: 2px solid black;
+    height: 25vh;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#stats > div, #talents > div {
+
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+
+}
+
+#stats > div > button, #talents > div > button {
+    height: 30px;
+    width: 30px;
+    margin-top: -10px;
+}
+
+#stats > div :nth-child(odd), #talents > div :nth-child(2) {
+
+    align-self: end;
+}
 
 #enterName {
 
     resize: none;
     border: none;
-
-    margin-bottom: 5%;
-    padding-top: 5%; 
-
-    height: 10%;
+    padding-top: 30px;
     width: 50%;
+    border-radius: 1px;
 
     text-align: center;
 }
 
 button {
-
+    z-index: 1000;
+    height: 25%;
+    width: 100%;
     padding: 0.5%;
 }
+
+#playerOverview {
+
+    height: 60vh;
+    width: 80vw;
+    
+    display: flex;
+    
+}
+
+#playerOverview > button {
+
+    width: 5%; 
+    height: 5%;
+}
+
+#nextGame {
+    position: absolute;
+    margin-left: 35vw;
+    margin-top: 55vh;
+}
+
+
+#playerInfo {
+    display: flex;
+
+}
+
+#playerInfo > h5, #playerInfo > h6 {
+    font-size: 3em;
+    color: white;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid white;
+}
+
+#mapOverview {
+    display: flex;
+}
+
+#map1, #map2 {
+
+    height: 350px;
+    width: 450px;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75%;
+    vertical-align: super;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+
+}
+
+#map1 {
+    background-image: url(../map1.png);
+    border-radius: 2px;
+    margin-right: 50px;
+}
+
+#map2 {
+    background-image: url(../map2.png);
+    border-radius: 2px;
+}
+
+#chooseMap {
+    height: 80%;
+    width: 80%;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chooseMap > button {
+    height: 50px;
+    width: 200px;
+}
+
+#castle, #cove {
+    height: 100%;
+    width: 100%;
+    background-color: grey;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#action, #player, #computer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+

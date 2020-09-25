@@ -8,7 +8,7 @@ function playerAttack() {
     else currentPlayerDamage = playerDamage;
 
     monsterHealth = physicalAttack(monsterHealth, currentPlayerDamage, playerDamageModifier);
-    playerHealth = lifeSteal(playerHealth, currentPlayerDamage, playerLifeSteal);
+    currentPlayerHealth = lifeSteal(currentPlayerHealth, currentPlayerDamage, playerLifeSteal);
 
     monsterHealth = checkHealth(monsterHealth);
     monsterAttack();
@@ -21,10 +21,40 @@ function monsterAttack() {
     if (physicalMiss > 100 - playerDodgeChance) currentMonsterDamage = 0;
     else currentMonsterDamage = monsterDamage;
 
-    playerHealth = physicalAttack(playerHealth, currentMonsterDamage, monsterDamageModifier);
+    currentPlayerHealth = physicalAttack(currentPlayerHealth, currentMonsterDamage, monsterDamageModifier);
 
-    playerHealth = checkHealth(playerHealth);
+    currentPlayerHealth = checkHealth(currentPlayerHealth);
     combatStatus();
+}
+
+
+
+function calculateBossExperience() {
+    if (bossStatus == 1) currentPlayerExp = currentPlayerExp + 100;
+    if (bossStatus == 2) currentPlayerExp = currentPlayerExp + 100;
+
+    else return;
+}
+
+function checkCharacterExperience() {
+
+    if(disableExperience == true) {
+        currentPlayerExp == "Max";
+        requiredPlayerExp == "";
+    }
+
+    if(playerLevel >= 3) {
+        playerLevel = 3;
+        disableExperience = true;
+        unlockFinalBoss();   
+    }
+
+    if(currentPlayerExp >= requiredPlayerExp) {
+        playerLevel++;
+        currentPlayerExp = currentPlayerExp - requiredPlayerExp;
+    }
+
+    else return;
 }
 
 
