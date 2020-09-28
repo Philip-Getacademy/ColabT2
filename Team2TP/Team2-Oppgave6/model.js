@@ -1,61 +1,73 @@
+    
+    
+    
+    
+    
+    //Changable global vaiables
+    let shortApp = document.getElementById('app');
+    let gameName = "War Dude";
+    let gameInit = "Slay";
+
+    
+    
     //model
 
     let playerName = "";
-    let classSelected;
+    let classSelected = "";
+    let classObject;
 
     let agility = 20;
-    let strength = 20;
+    let strength = 50;
     let intelligence = 20;
 
+
+    // CLASS ABILITIES
+    //////////////////////////////////////////////////////////////////////////////
     // swing
     let warriorAttack = 50;
-    // rend DOT
-    let warriorBleed = 10;
     // execute, at which precent NPC dies if used
     let warriorExecute = 20;
     
     // fireball
     let mageAttack = 150;
-    // scortch DOT
-    let mageBleed = 160;
     // pyroignition, at which precent NPC dies if used
     let mageExecute = 20;
 
-    // EXPERIENCE
 
+
+
+    // EXPERIENCE
+    //////////////////////////////////////////////////////////////////////////////
     let disableExperience = false;
     let playerLevel = 1;
     let currentPlayerExp = 0;
     let requiredPlayerExp;
 
-    
+    // MAP, BOSS, and COMBAT STATUS
+    //////////////////////////////////////////////////////////////////////////////
+
     let bossStatus; // Unlocking FINAL BOSS
     let chosenMap; // carries the chosen map value
 
-
-    if (playerLevel == 1) requiredPlayerExp = 100;
-    if (playerLevel == 2) requiredPlayerExp = 200;
-    if (playerLevel == 3) requiredPlayerExp = 300;
+    let playerLog = '';
+    let monsterLog = '';
 
 
 
     // Agility = crit & dodge, Strength = physicalDamage, Intelligence = magicalDamage
-    let stats = [agility, strength, intelligence];
+    // let stats = [agility, strength, intelligence];
 
-    let currentStats = classSelected == "warrior" ? 
     
-    // DISPLAYING STATS
-    let mageTalents = [mageAttack, mageBleed, mageExecute];
-    let mageStats = {mageAttack, mageBleed, mageExecute};
-    let warriorTalents = [warriorAttack, warriorBleed, warriorExecute];
-    let warriorStats = {};
+
+    let selectedStats;
+    let currentStats;
 
 
     // POINTER STATS
     //////////////////////////////////////////////////////////////////////////////
 
     // PLAYER DEFENSIVES
-    let playerHealth = 300; // First: Class, Second: Level
+    let playerHealth = 1000; // First: Class, Second: Level
     let playerDodgeChance = 0; // Agility
     const playerLifeSteal = 20; // Any, constant
 
@@ -66,13 +78,14 @@
 
 
     // MONSTER DEFENSIVES
-    let monsterHealth = 500; // Based on map
+    let monsterHealth = 2000; // Based on map
     let monsterArmor = 1000; // Decaying on additional swing - IGNORED by caster
 
     // MONSTER OFFENSIVES
     let monsterDamageModifier = 1; // Based on map FirstBoss: 1 (Castle), SecondBoss 2 (Cove), FinalBoss 3.
     const monsterDamage = 70; // Any, constant
     
+    let monsterStats = [monsterHealth, monsterArmor, monsterDamage];
 
     // CONBAT STATS
     //////////////////////////////////////////////////////////////////////////////
@@ -84,8 +97,27 @@
     // MONSTER MODIFIED VARIABLES
     let currentMonsterDamage;
     let currentMonsterHealth;
+    let currentMonsterArmor = monsterArmor;
+
 
    
+    let warriorObject = [
+        {'Health'  : playerHealth},
+        {'Damage'  : playerDamage},
+        {'Dodge'   : playerDodgeChance},
+        {'Crit'    : playerCritChance},
+        {'Swing'   : warriorAttack},
+        {'Execute' : warriorExecute}
+        
+    ];
+    let mageObject = [
+        {'Health'       : playerHealth},
+        {'Damage'       : playerDamage},
+        {'Dodge'        : playerDodgeChance},
+        {'Crit'         : playerCritChance},
+        {'Fireball'     : mageAttack},
+        {'pyroignition' : mageExecute}
+    ];
 
     // TALENTS AND STATS
     //////////////////////////////////////////////////////////////////////////////
@@ -94,3 +126,14 @@
 
     let statsAvailable = 0;
     let talentsAvailable = 0;
+
+
+
+    // DISPLAYING STATS
+
+    let mageTalents = [mageAttack, mageExecute];
+    let warriorTalents = [warriorAttack, warriorExecute];
+    
+    let mageBaseStats = [playerHealth, agility, strength, intelligence];
+    let warriorBaseStats = [playerHealth * 5, playerCritChance, playerDamage + strength, intelligence];
+    

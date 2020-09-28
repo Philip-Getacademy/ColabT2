@@ -186,8 +186,9 @@ button {
 }
 
 #playerInfo > h5, #playerInfo > h6 {
-    font-size: 3em;
+    font-size: 2em;
     color: white;
+    margin-bottom: 20px;
     margin-left: 50px;
     margin-right: 50px;
     padding: 15px;
@@ -218,13 +219,13 @@ button {
 }
 
 #map1 {
-    background-image: url(../map1.png);
+    background-image: url(../Pictures/map1.png);
     border-radius: 2px;
     margin-right: 50px;
 }
 
 #map2 {
-    background-image: url(../map2.png);
+    background-image: url(../Pictures/map2.png);
     border-radius: 2px;
 }
 
@@ -258,4 +259,41 @@ button {
     align-items: center;
 }
 
+#player, #computer {
+    align-self: flex-start;
+    padding-top: 6%;
+}
 
+#classImage {
+    height: 250px;
+    width: 250px;
+    background-size: 112%;
+    background-repeat: no-repeat;
+    border-style: none;
+}
+
+
+#action {
+    width: 600px;
+    height: 100%;
+}
+
+#combatlog {
+
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+}
+
+#action > button {
+    height: 50px;
+    width: 100px;
+}
+
+#HP {
+    font-size: 26px;
+}
+
+#combatText {
+    font-size: small;
+}
