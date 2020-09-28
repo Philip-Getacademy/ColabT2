@@ -10,7 +10,7 @@ function choseMap() {
 
     
     let disableAction = chosenMap == "castle" || chosenMap == "cove" ? "" : "disabled";
-    hideFinalBoss = hideFinalBoss == true ? 'hidden' : '';
+    hideFinalBoss = hideFinalBoss == true ? 'none' : '';
 
     let choseMapScreen = `
         <div id="playerInfo">   
@@ -20,9 +20,9 @@ function choseMap() {
             <div id="mapOverview">
                 <div id="map1" onclick="chosenMap = 'castle', choseMap()"><sup>Castle</sup></div>
                 <div id="map2" onclick="chosenMap = 'cove', choseMap()"><sup>Cove</sup></div>
-                <div id="map3" onclick="chosenMap = 'finalBoss', choseMap()"style="display: ${hideFinalBoss};" ><sup>FinalBoss</sup></div>
+                <div id="map3" onclick="chosenMap = 'finalBoss', choseMap()"style="display: ${hideFinalBoss};" ><sup>FinalBoss</sup></div><br>
             </div>
-            <button ${disableAction} id="nextGame" onclick="combatStatus()">${gameInit}</button>
+            <button ${disableAction} id="nextGame" onclick="combatStatus()">${gameInit}</button> 
         </div>
     `;
 

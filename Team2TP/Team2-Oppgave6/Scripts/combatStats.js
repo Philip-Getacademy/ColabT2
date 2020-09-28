@@ -2,6 +2,7 @@ function combatStats() {
 
     calculateBossExperience();
     checkCharacterExperience();
+    
     let enableAction = monsterHealth <=0 || playerHealth <= 0 ? "" : "disabled";
 
 

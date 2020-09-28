@@ -171,12 +171,13 @@ button {
 
     width: 5%; 
     height: 5%;
+    margin-left: 37vw;
 }
 
+
+
 #nextGame {
-    position: absolute;
-    margin-left: 35vw;
-    margin-top: 55vh;
+
 }
 
 
@@ -184,6 +185,13 @@ button {
     display: flex;
 
 }
+
+#playerInfoDiv{
+    height: 70px;
+    width: 100px;
+
+}
+
 
 #playerInfo > h5, #playerInfo > h6 {
     font-size: 2em;
@@ -234,11 +242,13 @@ button {
     width: 80%;
     background-color: cadetblue;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 #chooseMap > button {
+    margin-top: 50px;
     height: 50px;
     width: 200px;
 }

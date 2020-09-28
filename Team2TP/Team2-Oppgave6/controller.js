@@ -84,15 +84,17 @@ function checkCharacterExperience() {
     if (playerLevel == 1) requiredPlayerExp = 100;
     if (playerLevel == 2) requiredPlayerExp = 200;
 
-    if(disableExperience == true) {
-        currentPlayerExp == "Max";
-        requiredPlayerExp == "";
-    }
+
 
     if(playerLevel >= 3) {
         playerLevel = 3;
         disableExperience = true;
         unlockFinalBoss();   
+    }
+
+    if(disableExperience == true) {
+        currentPlayerExp == "Max";
+        requiredPlayerExp == "";
     }
 
     if(currentPlayerExp >= requiredPlayerExp) {

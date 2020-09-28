@@ -39,6 +39,7 @@ function drawTown() {
                     <div>Intelligence ${intelligence} <button ${disableStats} onclick="increaseStats(2)">${statsAvailable}</button></div>
                 </div>
             </div>
+            <button id="nextGame" onclick="choseMap()">${gameInit}</button>
             <div id="talentsContainer">
                 <button onclick="showThis(this)" value="false">talents</button>
                 <div id="talents" style="display: none">
@@ -46,9 +47,8 @@ function drawTown() {
                     <div>${talentTwoDescription} ${talentTwo} <button ${disableTalents} onclick="increaseTalent(1)">${talentsAvailable}</button></div>
                 </div>
             </div>
-            
-            <button id="nextGame" onclick="choseMap()">${gameInit}</button>
         </div>
+
         <div id="square"></div>
     `;
 
