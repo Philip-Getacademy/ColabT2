@@ -1,8 +1,4 @@
 function drawSettings() {
-    
-    if(classSelected == "warrior") classObject = warriorObject
-    else classObject = mageObject
-
 
     let settingsScreen = `
         <div class="preGame" id="preGame" style="justify-content: space-between;">

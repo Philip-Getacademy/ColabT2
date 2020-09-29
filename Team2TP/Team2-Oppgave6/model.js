@@ -1,6 +1,7 @@
     
     
-    
+    let elementPlayerLog = document.getElementById('playerLog');
+    let elementMonsterLog = document.getElementById('monsterLog');
     
     
     //Changable global vaiables
@@ -18,18 +19,17 @@
 
     let agility = 20;
     let strength = 50;
-    let intelligence = 20;
 
 
     // CLASS ABILITIES
     //////////////////////////////////////////////////////////////////////////////
     // swing
-    let warriorAttack = 50;
+    let warriorAttack = 0;
     // execute, at which precent NPC dies if used
     let warriorExecute = 20;
     
     // fireball
-    let mageAttack = 150;
+    let mageAttack = 0;
     // pyroignition, at which precent NPC dies if used
     let mageExecute = 20;
 
@@ -41,7 +41,7 @@
     let disableExperience = false;
     let playerLevel = 1;
     let currentPlayerExp = 0;
-    let requiredPlayerExp;
+    let requiredPlayerExp = 100;
 
     // MAP, BOSS, and COMBAT STATUS
     //////////////////////////////////////////////////////////////////////////////
@@ -54,13 +54,12 @@
 
 
 
-    // Agility = crit & dodge, Strength = physicalDamage, Intelligence = magicalDamage
-    // let stats = [agility, strength, intelligence];
+    // Agility = crit & dodge, Strength = physicalDamage,  = magicalDamage
+    // let stats = [agility, strength, ];
 
     
 
     let selectedStats;
-    let currentStats;
 
 
     // POINTER STATS
@@ -68,17 +67,18 @@
 
     // PLAYER DEFENSIVES
     let playerHealth = 1000; // First: Class, Second: Level
-    let playerDodgeChance = 0; // Agility
+    let playerDodgeChance = agility; // Agility
     const playerLifeSteal = 20; // Any, constant
 
     // PLAYER OFFENSIVES
     let playerDamageModifier = 1; // Level
-    let playerDamage = 50; // Strength || Intelligence
-    let playerCritChance = 70; // Agility
+    let playerDamage = strength; // Strength || 
+    let playerCritChance = agility * 2; // Agility
+
 
 
     // MONSTER DEFENSIVES
-    let monsterHealth = 2000; // Based on map
+    let monsterHealth = 3500; // Based on map
     let monsterArmor = 1000; // Decaying on additional swing - IGNORED by caster
 
     // MONSTER OFFENSIVES
@@ -100,25 +100,6 @@
     let currentMonsterArmor = monsterArmor;
 
 
-   
-    let warriorObject = [
-        {'Health'  : playerHealth},
-        {'Damage'  : playerDamage},
-        {'Dodge'   : playerDodgeChance},
-        {'Crit'    : playerCritChance},
-        {'Swing'   : warriorAttack},
-        {'Execute' : warriorExecute}
-        
-    ];
-    let mageObject = [
-        {'Health'       : playerHealth},
-        {'Damage'       : playerDamage},
-        {'Dodge'        : playerDodgeChance},
-        {'Crit'         : playerCritChance},
-        {'Fireball'     : mageAttack},
-        {'pyroignition' : mageExecute}
-    ];
-
     // TALENTS AND STATS
     //////////////////////////////////////////////////////////////////////////////
 
@@ -134,6 +115,6 @@
     let mageTalents = [mageAttack, mageExecute];
     let warriorTalents = [warriorAttack, warriorExecute];
     
-    let mageBaseStats = [playerHealth, agility, strength, intelligence];
-    let warriorBaseStats = [playerHealth * 5, playerCritChance, playerDamage + strength, intelligence];
+    let mageBaseStats = [playerDamage, playerCritChance, playerDodgeChance];
+    let warriorBaseStats = [playerDamage, playerCritChance, playerDodgeChance];
     

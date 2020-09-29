@@ -1,9 +1,12 @@
 //controller
+
 function playerAttack() {
 
     let physicalCrit = randomNumber(1, 100);
     
     if(playerClass == "mage") {
+
+        playerDamage = playerDamage + mageAttack;;
 
         if (physicalCrit > 100 - playerCritChance) currentPlayerDamage = playerDamage * 4;
         else currentPlayerDamage = playerDamage;
@@ -14,11 +17,13 @@ function playerAttack() {
     
         currentMonsterHealth = checkHealth(currentMonsterHealth);
     
-        playerLog += `${playerName} does ${currentPlayerDamage} damage <br>`
+        playerLog += `<p>${playerName} does ${currentPlayerDamage} damage </p>`
 
         monsterAttack();
     }
     else {
+
+        playerDamage = playerDamage + warriorAttack;
 
         if (physicalCrit > 100 - playerCritChance) currentPlayerDamage = playerDamage * 2;
         else currentPlayerDamage = playerDamage;
@@ -35,7 +40,7 @@ function playerAttack() {
 
         currentMonsterHealth = checkHealth(currentMonsterHealth);
     
-        playerLog += `${playerName} does ${currentPlayerDamage} damage <br>`
+        playerLog += `<p>${playerName} does ${currentPlayerDamage} damage </p>`
         monsterAttack();
 
 
@@ -55,6 +60,9 @@ function playerExecute() {
 
 function monsterAttack() {
 
+    elementPlayerLog = document.getElementById('playerLog');
+    elementMonsterLog = document.getElementById('monsterLog');
+
     let physicalMiss = randomNumber(1, 100);
 
     if (physicalMiss > 100 - playerDodgeChance) currentMonsterDamage = 0;
@@ -63,60 +71,55 @@ function monsterAttack() {
     currentPlayerHealth = physicalAttack(currentPlayerHealth, currentMonsterDamage, monsterDamageModifier);
 
     currentPlayerHealth = checkHealth(currentPlayerHealth);
-    monsterLog += `${chosenMap} boss does ${currentMonsterDamage} damage <br>`
+    monsterLog += `<p>${chosenMap} boss does ${currentMonsterDamage} damage <br></p>`
+    updateScroll();
     combatStatus();
 }
 
 // Experience
-function calculateBossExperience() {
 
-    if (bossStatus == 1) currentPlayerExp = currentPlayerExp + 100;
-    if (bossStatus == 2) currentPlayerExp = currentPlayerExp + 200;
-    
+function calculatePlayerExperience() {
+
+    if(playerLevel < 3) {
+        
+        if(playerLevel == 1 && bossStatus == 1 || playerLevel == 2 && bossStatus == 1) {
+            currentPlayerExp += 100;
+
+        }
+        else currentPlayerExp += 200;
 
 
-    else return;
+        if (currentPlayerExp >= requiredPlayerExp) {
+            increaseStatsAndTalents();
+            currentPlayerExp = 0;
+        }
+
+    }
+    else return
+ 
 }
 
+// extra stats for testing
+function increaseStatsAndTalents() {
 
-function checkCharacterExperience() {
-
-    if (playerLevel == 1) requiredPlayerExp = 100;
-    if (playerLevel == 2) requiredPlayerExp = 200;
-
-
-
-    if(playerLevel >= 3) {
-        playerLevel = 3;
-        disableExperience = true;
-        unlockFinalBoss();   
-    }
-
-    if(disableExperience == true) {
-        currentPlayerExp == "Max";
-        requiredPlayerExp == "";
-    }
-
-    if(currentPlayerExp >= requiredPlayerExp) {
-        playerLevel++;
-        statsAvailable += 5;
-        talentsAvailable += 2;
-        currentPlayerExp = currentPlayerExp - requiredPlayerExp;
-    }
-
-
-    else return;
+    playerLevel++;
+    requiredPlayerExp = 200;
+    statsAvailable += 2;
+    talentsAvailable += 1;
 }
-
 
 // Incresse Stats & Talents
 function increaseStats(statincrease) {
 
     if(statincrease == 0) agility = agility + 5;
     if(statincrease == 1) strength = strength + 5;
-    if(statincrease == 2) intelligence = intelligence + 5;
 
-   statsAvailable -= 5;
+   statsAvailable -= 1;
+
+   playerDamage = strength;
+   playerCritChance = agility * 2;
+   playerDodgeChance = agility;
+
    drawTown();
 }
 
@@ -156,6 +159,12 @@ function checkHealth(health) { return health = health <= 0 ? 0 : health; }
 // Controller Show/ Hide <div id="button.innerHTML"/>
 function showThis(button) { 
     document.getElementById(button.innerHTML).style.display = (
-        document.getElementById(button.innerHTML).style.display == "none" ? "flex" : "none"
+        document.getElementById(button.innerHTML).style.display == "flex" ? "none" : "flex"
     ); 
+}
+
+function updateScroll() {
+
+    elementPlayerLog.scrollTop = elementPlayerLog.scrollHeight;
+    elementMonsterLog.scrollTop = elementMonsterLog.scrollHeight;
 }

@@ -82,6 +82,13 @@ button {
 
 }
 
+#contentAligner {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
 #statsContainer, #talentsContainer {
     z-index: 1000;
     width: 50vw;
@@ -152,38 +159,39 @@ button {
 }
 
 button {
+
     z-index: 1000;
     height: 25%;
     width: 100%;
     padding: 0.5%;
+    
 }
 
 #playerOverview {
 
     height: 60vh;
     width: 80vw;
-    
     display: flex;
     
 }
 
 #playerOverview > button {
 
-    width: 5%; 
-    height: 5%;
+    width: 4%; 
+    height: 4%;
     margin-left: 37vw;
 }
 
-
-
-#nextGame {
-
-}
+/* #nextGame {
+   
+} */
 
 
 #playerInfo {
     display: flex;
-
+    z-index: 100;
+    margin-top: 20px;
+    margin-left: 80px;
 }
 
 #playerInfoDiv{
@@ -272,6 +280,7 @@ button {
 #player, #computer {
     align-self: flex-start;
     padding-top: 6%;
+    height: 50%;
 }
 
 #classImage {
@@ -284,15 +293,36 @@ button {
 
 
 #action {
-    width: 600px;
     height: 100%;
+    width: 600px;
 }
 
 #combatlog {
 
-    width: inherit;
+    width: 100%;
+    height: 250px;
     display: flex;
     justify-content: space-between;
+    overflow-x: hidden;
+
+}
+#playerLog {
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-align: end;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 0px;
+}
+#monsterLog {
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-align: end;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 0px;
 }
 
 #action > button {

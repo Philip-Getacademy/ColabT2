@@ -20,11 +20,11 @@ function choseMap() {
             <div id="mapOverview">
                 <div id="map1" onclick="chosenMap = 'castle', choseMap()"><sup>Castle</sup></div>
                 <div id="map2" onclick="chosenMap = 'cove', choseMap()"><sup>Cove</sup></div>
-                <div id="map3" onclick="chosenMap = 'finalBoss', choseMap()"style="display: ${hideFinalBoss};" ><sup>FinalBoss</sup></div><br>
+                <div id="map1" onclick="chosenMap = 'finalBoss', choseMap()"style="display: ${hideFinalBoss};" ><sup>FinalBoss</sup></div><br>
             </div>
             <button ${disableAction} id="nextGame" onclick="combatStatus()">${gameInit}</button> 
         </div>
     `;
-
+    if (chosenMap == "cove") currentMonsterHealth = 50000;
     shortApp.innerHTML = choseMapScreen;
 }

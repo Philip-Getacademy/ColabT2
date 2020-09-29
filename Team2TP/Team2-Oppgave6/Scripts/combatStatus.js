@@ -1,18 +1,25 @@
 function combatStatus() {
 
-
-    currentStats = selectedStats;
     
+    
+
     let executeTarget = warriorExecute > mageExecute ? warriorExecute : mageExecute;
 
     let disableAction = currentMonsterHealth <= 0 || currentPlayerHealth <= 0 ? "disabled" : "";
     let enableAction = currentMonsterHealth <=0 || currentPlayerHealth <= 0 ? "" : "disabled";
     let enableExecute = currentMonsterHealth <= (monsterHealth / 100) * executeTarget ? "" : "disabled";
 
+
+
+
+
+
+    let attackName = playerClass == "mage" ? "Fireball" : "Swing";
+
     if(currentMonsterHealth <= 0) enableExecute = "disabled";
 
     // let timeOut = timeOut(function(){}, 3000);
-    
+
     
     if (chosenMap === "castle") {
 
@@ -26,20 +33,20 @@ function combatStatus() {
                 <div id="player">
                     <p id="HP">Player Health: ${currentPlayerHealth}</p>
                     <img id="classImage" src="Pictures/${playerClass}.png">
-                    <div>Health ${currentStats[0]}<br> Agillity ${currentStats[1]}<br> Strength ${currentStats[2]}<br> Intelligence ${currentStats[3]} </div>
-                    <button ${disableAction} onclick="playerAttack()">Attack</button>   
+                    <div>Damage ${strength}<br> Crit Chance ${agility * 2}<br> Dodge Chance ${agility}<br></div>
+
+                    <button ${disableAction} onclick="playerAttack()">${attackName}</button>   
                     <button ${enableExecute} onclick="playerExecute()">Execute</button>   
                 </div>
 
                 <div id="action">
                     <div id="combatlog">
                         <div id="playerLog">
-                            <p>${playerLog}</p>
+                            ${playerLog}
                         </div>
 
                         <div id="monsterLog">
-                            <p>${monsterLog}</p>
-                            
+                            ${monsterLog}
                         </div>
                     </div>
                 </div>
@@ -47,7 +54,9 @@ function combatStatus() {
                 <div id="computer">
                     <p id="HP">Monster Health: ${currentMonsterHealth}</p>
                     <img id="classImage" src="Pictures/${chosenMap}Boss.png">
+
                     <div>Health ${monsterStats[0]} <br> Armor ${currentMonsterArmor} <br> Damage ${monsterStats[2]}</div>
+
                     <button ${enableAction} onclick="combatStats()">Show stats...</button>
                 </div>
             </div>   
@@ -68,7 +77,8 @@ function combatStatus() {
                 <div id="player">
                     <p id="HP">Player Health: ${currentPlayerHealth}</p>
                     <img id="classImage" src="Pictures/${playerClass}.png">
-                    <div>Health ${currentStats[0]}<br> Agillity ${currentStats[1]}<br> Strength ${currentStats[2]}<br> Intelligence ${currentStats[3]} </div>
+                    <div>Damage ${strength}<br> Crit Chance ${agility * 2}<br> Dodge Chance ${agility}<br></div>
+
                     <button ${disableAction} onclick="playerAttack()">Attack</button>   
                     <button ${enableExecute} onclick="playerExecute()">Execute</button>   
                 </div>
@@ -76,11 +86,11 @@ function combatStatus() {
                 <div id="action">
                     <div id="combatlog">
                         <div id="playerLog">
-                            <p>${playerLog}</p>
+                            ${playerLog}
                         </div>
 
                         <div id="monsterLog">
-                            <p>${monsterLog}</p>
+                            ${monsterLog}
                             
                         </div>
                     </div>
@@ -100,3 +110,4 @@ function combatStatus() {
 
     else return choseMap(); 
 }
+
